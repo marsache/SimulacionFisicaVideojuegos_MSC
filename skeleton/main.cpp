@@ -7,6 +7,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
+#include "Particle.h"
 
 #include <iostream>
 
@@ -29,6 +30,9 @@ PxPvd*                  gPvd        = NULL;
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
+
+// Partícula
+Particle* particula;
 
 
 // Initialize physics engine
@@ -54,18 +58,25 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+
+	particula = new Particle(Vector3(0, 0, 0), Vector3(0, 0.01, 0), 5);
 	}
 
 
 // Function to configure what happens in each step of physics
 // interactive: true if the game is rendering, false if it offline
 // t: time passed since last call in milliseconds
+// aquí se llaman a todos los integrates o updates
+// llamadas para actualizar las escenas
+// double t: tiempo
 void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+
+	particula->integrate(t);
 }
 
 // Function to clean data
