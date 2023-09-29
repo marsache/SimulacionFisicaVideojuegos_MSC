@@ -76,7 +76,7 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
-	particula->integrate(t);
+	particula->integratev2(t);
 }
 
 // Function to clean data

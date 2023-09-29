@@ -12,5 +12,13 @@ void Particle::integrate(double t) {
 	_pose.p.x += vel.x;
 	_pose.p.y += vel.y;
 	_pose.p.z += vel.z;
-	//cout << _pose.p.x << " " << _pose.p.y << " " << _pose.p.z << endl;
+}
+
+void Particle::integratev2(double t) {
+	vel.x = (vel.x + ACCELERATION.x * t) * pow(DAMPING, t);
+	vel.y = (vel.y + ACCELERATION.y * t) * pow(DAMPING, t);
+	vel.z = (vel.z + ACCELERATION.z * t) * pow(DAMPING, t);
+	_pose.p.x += vel.x;
+	_pose.p.y += vel.y;
+	_pose.p.z += vel.z;
 }

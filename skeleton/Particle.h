@@ -2,11 +2,15 @@
 #include "PxPhysicsAPI.h"
 #include "RenderUtils.hpp"
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 using namespace physx;
 typedef physx::PxVec3 Vector3;
 typedef physx::PxVec4 Vector4;
+
+const double DAMPING = 0.998;
+const Vector3 ACCELERATION = Vector3(0, 0, 0);
 
 class Particle
 {
@@ -15,6 +19,7 @@ public:
 	~Particle();
 
 	void integrate(double t);
+	void integratev2(double t);
 
 private:
 	Vector3 vel;
