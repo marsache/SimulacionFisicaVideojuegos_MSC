@@ -8,6 +8,9 @@
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
 #include "Particle.h"
+#include "ProjectileManager.h"
+#include "Target.h"
+#include "Ground.h"
 
 #include <iostream>
 
@@ -32,8 +35,11 @@ PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
 // Partícula
-Particle* particula;
+//Particle* particula;
 
+ProjectileManager* projectileMngr;
+Target* target;
+Ground* ground;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -59,7 +65,17 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-	particula = new Particle(Vector3(0, 0, 0), Vector3(0, 0.01, 0), 5);
+	//particula = new Particle(Vector3(0, 0, 0), Vector3(0.01, 0, 0), 2, 0.1);
+
+	projectileMngr = new ProjectileManager();
+	physx::PxTransform posTarget = GetCamera()->getTransform();
+	posTarget.p -= PxVec3(40, 0, 40);
+	target = new Target(posTarget, Vector4(255, 0, 0, 1), PxVec3(10, 10, 10));
+
+	physx::PxTransform posGround = GetCamera()->getTransform();
+	posGround.p -= PxVec3(0, 50, 50);
+	ground = new Ground(posGround, Vector4(130, 94, 92, 1), PxVec3(1, 150, 150));
+
 	}
 
 
@@ -76,7 +92,8 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
-	particula->integratev2(t);
+	//particula->integratev2(t);
+	projectileMngr->integrate(t);
 }
 
 // Function to clean data
@@ -104,7 +121,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch(toupper(key))
 	{
-	//case 'B': break;
+	case 'B': 
+		projectileMngr->createProjectile();
+		break;
 	//case ' ':	break;
 	case ' ':
 	{
