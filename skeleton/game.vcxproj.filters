@@ -14,6 +14,8 @@
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="Target.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="ParticleGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -29,6 +31,8 @@
     <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="Target.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ParticleGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -1,7 +1,7 @@
 #include "Particle.h"
 
-Particle::Particle(Vector3 Pos, Vector3 Vel, int Rad, float Masa) : _pose(Pos), vel(Vel), radius(Rad), mass(Masa), timeAlive(0) {
-	renderItem = new RenderItem(CreateShape(PxSphereGeometry(radius)), &_pose ,Vector4(50, 50, 50, 50));
+Particle::Particle(Vector3 pos, Vector3 _vel, int rad, float _mass, PxGeometry* shape) : _pose(pos), vel(_vel), radius(rad), mass(_mass), timeAlive(0) {
+	renderItem = new RenderItem(CreateShape(*shape), &_pose, Vector4(50, 50, 50, 50));
 	alive = true;
 }
 

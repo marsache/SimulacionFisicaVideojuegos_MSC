@@ -16,7 +16,7 @@ const float PARTICLE_LIFE = 170.0;
 class Particle
 {
 public:
-	Particle(Vector3 Pos, Vector3 Vel, int Rad, float Masa);
+	Particle(Vector3 pos, Vector3 _vel, int rad, float _mass, PxGeometry* shape);
 	~Particle();
 
 	//void integrate(double t);

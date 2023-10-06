@@ -4,6 +4,8 @@
 
 using namespace std;
 
+const int PROJECTILE_RADIUS = 2;
+
 class ProjectileManager
 {
 public:
