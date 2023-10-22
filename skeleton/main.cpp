@@ -11,6 +11,7 @@
 #include "ProjectileManager.h"
 #include "Target.h"
 #include "Ground.h"
+#include "ParticleSystem.h"
 
 #include <iostream>
 
@@ -41,6 +42,8 @@ ProjectileManager* projectileMngr;
 Target* target;
 Ground* ground;
 
+ParticleSystem* particleSys;
+
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -68,14 +71,16 @@ void initPhysics(bool interactive)
 	//particula = new Particle(Vector3(0, 0, 0), Vector3(0.01, 0, 0), 2, 0.1);
 
 	projectileMngr = new ProjectileManager();
-	physx::PxTransform posTarget = GetCamera()->getTransform();
+
+	/*physx::PxTransform posTarget = GetCamera()->getTransform();
 	posTarget.p -= PxVec3(40, 0, 40);
 	target = new Target(posTarget, Vector4(255, 0, 0, 1), PxVec3(10, 10, 10));
 
 	physx::PxTransform posGround = GetCamera()->getTransform();
 	posGround.p -= PxVec3(0, 50, 50);
-	ground = new Ground(posGround, Vector4(130, 94, 92, 1), PxVec3(1, 150, 150));
+	ground = new Ground(posGround, Vector4(130, 94, 92, 1), PxVec3(1, 150, 150));*/
 
+	particleSys = new ParticleSystem();
 	}
 
 
@@ -94,6 +99,8 @@ void stepPhysics(bool interactive, double t)
 
 	//particula->integratev2(t);
 	projectileMngr->integrate(t);
+
+	particleSys->update(t);
 }
 
 // Function to clean data

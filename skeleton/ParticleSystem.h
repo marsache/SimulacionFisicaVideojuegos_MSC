@@ -3,13 +3,15 @@
 #include <list>
 #include "Particle.h"
 #include "ParticleGenerator.h"
+#include "GaussianParticleGenerator.h"
+#include "UniformParticleGenerator.h"
 
 using namespace std;
 
-const int PARTICLE_RADIUS = 2;
-const int PARTICLE_POS_INI = 0;
-const int PARTICLE_POS_FIN = 5;
-const Vector3 PARTICLE_DIR = Vector3(0, 10, 0);
+//const int PARTICLE_RADIUS = 2;
+//const int PARTICLE_POS_INI = 0;
+//const int PARTICLE_POS_FIN = 5;
+//const Vector3 PARTICLE_DIR = Vector3(0, 10, 0);
 
 class ParticleSystem
 {
@@ -22,6 +24,7 @@ public:
 	~ParticleSystem();
 
 	void update(double t);
-	//ParticleGenerator* getParticleGenerator(string name);
+	ParticleGenerator* getParticleGenerator(string name);
 	void generateFireworkSystem();
+	void deleteParticles();
 };

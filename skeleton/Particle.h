@@ -11,7 +11,8 @@ typedef physx::PxVec4 Vector4;
 
 const double DAMPING = 0.6;
 const Vector3 ACCELERATION = Vector3(0, -20, 0);
-const float PARTICLE_LIFE = 170.0;
+//const float PARTICLE_LIFE = 170.0;
+const float PARTICLE_LIFE = 100.0;
 
 class Particle
 {
