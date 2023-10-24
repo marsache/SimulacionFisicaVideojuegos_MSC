@@ -15,7 +15,7 @@ list<Particle*> UniformParticleGenerator::generateParticles() {
 
 	// cambiar velocidad
 	for (int i = 0; i < UNIFORM_PARTICLES; ++i) {
-		particlesList.push_back(new Particle(meanPos, Vector3(0, -3, 0), PARTICLE_RADIUS, 5, &PxSphereGeometry(PARTICLE_RADIUS)));
+		particlesList.push_back(new Particle(meanPos, Vector3(0, -3, 0), UNIFORM_PARTICLE_RADIUS, 5, &PxSphereGeometry(UNIFORM_PARTICLE_RADIUS), 1));
 	}
 
 	return particlesList;

@@ -11,13 +11,14 @@ typedef physx::PxVec4 Vector4;
 
 const double DAMPING = 0.6;
 const Vector3 ACCELERATION = Vector3(0, -20, 0);
+const Vector3 GRAVITY = Vector3(0, -10, 0);
 //const float PARTICLE_LIFE = 170.0;
 const float PARTICLE_LIFE = 100.0;
 
 class Particle
 {
 public:
-	Particle(Vector3 pos, Vector3 _vel, int rad, float _mass, PxGeometry* shape);
+	Particle(Vector3 pos, Vector3 _vel, int rad, float _mass, PxGeometry* shape, int gen);
 	~Particle();
 
 	//void integrate(double t);
@@ -33,5 +34,6 @@ private:
 	RenderItem* renderItem; // es importante que sea un puntero
 	float timeAlive;
 	bool alive;
+	int generation;
 };
 

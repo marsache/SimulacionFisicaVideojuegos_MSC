@@ -1,6 +1,6 @@
 #include "Particle.h"
 
-Particle::Particle(Vector3 pos, Vector3 _vel, int rad, float _mass, PxGeometry* shape) : _pose(pos), vel(_vel), radius(rad), mass(_mass), timeAlive(0) {
+Particle::Particle(Vector3 pos, Vector3 _vel, int rad, float _mass, PxGeometry* shape, int gen) : _pose(pos), vel(_vel), radius(rad), mass(_mass), timeAlive(0), generation(gen) {
 	renderItem = new RenderItem(CreateShape(*shape), &_pose, Vector4(50, 50, 50, 50));
 	alive = true;
 }
@@ -24,7 +24,7 @@ void Particle::integratev2(double t) {
 	_pose.p.y += vel.y;
 	_pose.p.z += vel.z;*/
 
-	vel += ACCELERATION * t;
+	vel += GRAVITY * t;
 	vel *= pow(DAMPING, t);
 	_pose.p += vel * t;
 
