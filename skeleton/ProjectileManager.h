@@ -5,6 +5,7 @@
 using namespace std;
 
 const int PROJECTILE_RADIUS = 2;
+const float PROJECTILE_LIFE = 100;
 
 class ProjectileManager
 {

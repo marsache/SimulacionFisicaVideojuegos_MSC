@@ -11,7 +11,7 @@ ProjectileManager::~ProjectileManager() {
 void ProjectileManager::createProjectile() {
 	//particles.push_back({ new Particle(Vector3(0, 0, 0), Vector3(0.01, 0, 0), 2, 0.1), true });
 	particles.push_back(new Particle(GetCamera()->getTransform().p, GetCamera()->getDir() * 150,
-		PROJECTILE_RADIUS, 0.5, &PxSphereGeometry(PROJECTILE_RADIUS), 1));
+		PROJECTILE_RADIUS, 0.5, &PxSphereGeometry(PROJECTILE_RADIUS), 1, PROJECTILE_LIFE));
 }
 
 void ProjectileManager::killProjectile() {

@@ -2,15 +2,15 @@
 
 ParticleSystem::ParticleSystem() {
 
-	/*GaussianParticleGenerator* gaussianPG = new GaussianParticleGenerator();
+	GaussianParticleGenerator* gaussianPG = new GaussianParticleGenerator();
 	gaussianPG->setName("Gaussian");
 
-	particleGenerators.push_back(gaussianPG);*/
+	particleGenerators.push_back(gaussianPG);
 
-	UniformParticleGenerator* uniformPG = new UniformParticleGenerator();
+	/*UniformParticleGenerator* uniformPG = new UniformParticleGenerator();
 	uniformPG->setName("Uniform");
 
-	particleGenerators.push_back(uniformPG);
+	particleGenerators.push_back(uniformPG);*/
 }
 
 ParticleSystem::~ParticleSystem() {}

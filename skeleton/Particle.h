@@ -13,12 +13,12 @@ const double DAMPING = 0.6;
 const Vector3 ACCELERATION = Vector3(0, -20, 0);
 const Vector3 GRAVITY = Vector3(0, -10, 0);
 //const float PARTICLE_LIFE = 170.0;
-const float PARTICLE_LIFE = 100.0;
+//const float PARTICLE_LIFE = 100.0;
 
 class Particle
 {
 public:
-	Particle(Vector3 pos, Vector3 _vel, int rad, float _mass, PxGeometry* shape, int gen);
+	Particle(Vector3 pos, Vector3 _vel, float rad, float _mass, PxGeometry* shape, int gen, float pLife);
 	~Particle();
 
 	//void integrate(double t);
@@ -29,7 +29,8 @@ public:
 
 private:
 	Vector3 vel;
-	int radius, mass;
+	float radius, particleLife = 100;
+	int mass;
 	physx::PxTransform _pose;
 	RenderItem* renderItem; // es importante que sea un puntero
 	float timeAlive;
