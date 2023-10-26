@@ -27,4 +27,7 @@ public:
 	ParticleGenerator* getParticleGenerator(string name);
 	void generateFireworkSystem();
 	void deleteParticles();
+
+	void createUniformParticleGenerator();
+	void createGaussianParticleGenerator();
 };

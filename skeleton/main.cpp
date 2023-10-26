@@ -130,8 +130,13 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	case 'B': 
 		projectileMngr->createProjectile();
+		break; 
+	case 'N':
+		particleSys->createUniformParticleGenerator();
 		break;
-	//case ' ':	break;
+	case 'P':
+		particleSys->createGaussianParticleGenerator();
+		break;
 	case ' ':
 	{
 		break;

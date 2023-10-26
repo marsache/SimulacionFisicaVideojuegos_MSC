@@ -2,15 +2,6 @@
 
 ParticleSystem::ParticleSystem() {
 
-	GaussianParticleGenerator* gaussianPG = new GaussianParticleGenerator();
-	gaussianPG->setName("Gaussian");
-
-	particleGenerators.push_back(gaussianPG);
-
-	/*UniformParticleGenerator* uniformPG = new UniformParticleGenerator();
-	uniformPG->setName("Uniform");
-
-	particleGenerators.push_back(uniformPG);*/
 }
 
 ParticleSystem::~ParticleSystem() {}
@@ -64,5 +55,47 @@ void ParticleSystem::deleteParticles() {
 		}
 		else
 			++it;
+	}
+}
+
+void ParticleSystem::createUniformParticleGenerator() {
+	auto it = particleGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && it != particleGenerators.end()) {
+		if ((*it)->getName() == "Uniform") {
+			delete(*it);
+			particleGenerators.erase(it);
+			encontrado = true;
+		}
+		else
+			++it;
+	}
+
+	if (!encontrado) {
+		UniformParticleGenerator* uniformPG = new UniformParticleGenerator();
+		uniformPG->setName("Uniform");
+
+		particleGenerators.push_back(uniformPG);
+	}
+}
+
+void ParticleSystem::createGaussianParticleGenerator() {
+	auto it = particleGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && it != particleGenerators.end()) {
+		if ((*it)->getName() == "Gaussian") {
+			delete(*it);
+			particleGenerators.erase(it);
+			encontrado = true;
+		}
+		else
+			++it;
+	}
+
+	if (!encontrado) {
+		GaussianParticleGenerator* gaussianPG = new GaussianParticleGenerator();
+		gaussianPG->setName("Gaussian");
+
+		particleGenerators.push_back(gaussianPG);
 	}
 }

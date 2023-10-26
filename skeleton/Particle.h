@@ -15,6 +15,22 @@ const Vector3 GRAVITY = Vector3(0, -10, 0);
 //const float PARTICLE_LIFE = 170.0;
 //const float PARTICLE_LIFE = 100.0;
 
+struct particleInfo {
+	Vector3 position1;
+	Vector3 position2;
+	Vector3 velocity1;
+	Vector3 velocity2;
+	float radius;
+	float mass;
+	PxGeometry* shape;
+	int generation;
+	float life;
+};
+
+struct particleTypes {
+	particleInfo particle3 = { Vector3(0, 0, 0), Vector3(5, 5, 5), Vector3(3, 3, 3), Vector3(7, 7, 7), 3, 1, &PxSphereGeometry(3), 1, 100 };
+};
+
 class Particle
 {
 public:

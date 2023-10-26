@@ -4,6 +4,10 @@ UniformParticleGenerator::UniformParticleGenerator() : ParticleGenerator() {
 
 }
 
+UniformParticleGenerator::~UniformParticleGenerator() {
+	delete(this);
+}
+
 list<Particle*> UniformParticleGenerator::generateParticles() {
 	list<Particle*> particlesList;
 

@@ -19,6 +19,4 @@ protected:
 
 	Vector3 devPos, devVel;
 	double devT;
-	
-    //std::normal_distribution<double> d{10.0, 2.0};
 };
