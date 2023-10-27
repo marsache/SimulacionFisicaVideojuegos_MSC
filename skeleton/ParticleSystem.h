@@ -5,6 +5,8 @@
 #include "ParticleGenerator.h"
 #include "GaussianParticleGenerator.h"
 #include "UniformParticleGenerator.h"
+#include "FountainParticleGenerator.h"
+#include "FireworkParticleGenerator.h"
 
 using namespace std;
 
@@ -30,4 +32,6 @@ public:
 
 	void createUniformParticleGenerator();
 	void createGaussianParticleGenerator();
+	void createFountainParticleGenerator();
+	void createFireworkGenerator();
 };

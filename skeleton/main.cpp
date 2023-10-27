@@ -137,6 +137,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'P':
 		particleSys->createGaussianParticleGenerator();
 		break;
+	case 'F':
+		particleSys->createFountainParticleGenerator();
+		break;
+	case 'G':
+		particleSys->createFireworkGenerator();
+		break;
 	case ' ':
 	{
 		break;

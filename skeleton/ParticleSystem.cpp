@@ -99,3 +99,29 @@ void ParticleSystem::createGaussianParticleGenerator() {
 		particleGenerators.push_back(gaussianPG);
 	}
 }
+
+void ParticleSystem::createFountainParticleGenerator() {
+	auto it = particleGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && it != particleGenerators.end()) {
+		if ((*it)->getName() == "Fountain") {
+			delete(*it);
+			particleGenerators.erase(it);
+			encontrado = true;
+		}
+		else
+			++it;
+	}
+
+	if (!encontrado) {
+		FountainParticleGenerator* fountainPG = new FountainParticleGenerator();
+		fountainPG->setName("Fountain");
+
+		particleGenerators.push_back(fountainPG);
+	}
+}
+
+void ParticleSystem::createFireworkGenerator() {
+	FireworkParticleGenerator* fireworkParticleGenerator = new FireworkParticleGenerator();
+	particles.push_back(fireworkParticleGenerator->generateParticle());
+}
