@@ -49,7 +49,7 @@ list<Firework*> FireworkParticleGenerator::createChildren(Firework* parent) {
 	// por limpiar
 	switch (parent->getGen()) {
 	case 3:
-		particlesToCreate = 3;
+		particlesToCreate = 4;
 		radius = particleTypes.particle2.radius;
 		mass = particleTypes.particle2.mass;
 		life = particleTypes.particle2.life;
@@ -75,10 +75,14 @@ list<Firework*> FireworkParticleGenerator::createChildren(Firework* parent) {
 	list <Firework*> fireworks;
 	for (int i = 0; i < particlesToCreate; i++) {
 		Vector3 velocity;
+		int R = 50 / particlesToCreate;
+		float degrees = 360.0 / particlesToCreate;
 		// c�lculo de la velocidad
-		velocity.x = rand() % 1;
-		velocity.y = rand() % 60 - 20;
-		velocity.z = rand() % 20 - 20;
+		int velMin = degrees * i + 1;
+		int velMax = degrees * i;
+		velocity.x = R * cos(rand() % velMin + velMax);
+		velocity.y = R * sin(rand() % velMin + velMax);
+		velocity.z = rand() % 1;
 
 		fireworks.push_back(new Firework(parent->getPosition(), velocity, radius, mass,
 			&PxSphereGeometry(radius), parent->getGen() - 1, life));
