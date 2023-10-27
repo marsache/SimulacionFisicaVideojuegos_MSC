@@ -7,6 +7,8 @@
 using namespace std;
 using namespace ParticleInfo;
 
+const int RADIUS = 150;
+
 class FireworkParticleGenerator : public ParticleGenerator
 {
 public:

@@ -75,14 +75,14 @@ list<Firework*> FireworkParticleGenerator::createChildren(Firework* parent) {
 	list <Firework*> fireworks;
 	for (int i = 0; i < particlesToCreate; i++) {
 		Vector3 velocity;
-		int R = 50 / particlesToCreate;
+		int R = RADIUS / particlesToCreate;
 		float degrees = 360.0 / particlesToCreate;
 		// c�lculo de la velocidad
 		int velMin = degrees * i + 1;
 		int velMax = degrees * i;
 		velocity.x = R * cos(rand() % velMin + velMax);
 		velocity.y = R * sin(rand() % velMin + velMax);
-		velocity.z = rand() % 1;
+		velocity.z = R * sin(rand() % velMin + velMax);
 
 		fireworks.push_back(new Firework(parent->getPosition(), velocity, radius, mass,
 			&PxSphereGeometry(radius), parent->getGen() - 1, life));
