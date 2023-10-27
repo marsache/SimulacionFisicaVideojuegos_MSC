@@ -19,6 +19,7 @@ class ParticleSystem
 {
 private:
 	list<Particle*> particles;
+	list<Firework*> fireworks;
 	list<ParticleGenerator*> particleGenerators;
 
 public:
@@ -29,6 +30,7 @@ public:
 	ParticleGenerator* getParticleGenerator(string name);
 	void generateFireworkSystem();
 	void deleteParticles();
+	void explode();
 
 	void createUniformParticleGenerator();
 	void createGaussianParticleGenerator();

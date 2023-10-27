@@ -38,5 +38,51 @@ Firework* FireworkParticleGenerator::generateParticle() {
 	velocity.y = rand() % int(particleType.particle3.velocityMin.y) + int(particleType.particle3.velocityMax.y);
 	velocity.z = rand() % int(particleType.particle3.velocityMin.z) + int(particleType.particle3.velocityMax.z);
 
-	return new Firework(position, velocity, particleType.particle3.radius - 2, particleType.particle3.mass, &PxSphereGeometry(particleType.particle3.radius), particleType.particle3.generation, particleType.particle3.life);
+	return new Firework(position, velocity, particleType.particle3.radius - 2, particleType.particle3.mass, 
+		&PxSphereGeometry(particleType.particle3.radius), particleType.particle3.generation, particleType.particle3.life);
+}
+
+list<Firework*> FireworkParticleGenerator::createChildren(Firework* parent) {
+	ParticleTypes particleTypes;
+	int particlesToCreate, life;
+	float radius, mass;
+	// por limpiar
+	switch (parent->getGen()) {
+	case 3:
+		particlesToCreate = 3;
+		radius = particleTypes.particle2.radius;
+		mass = particleTypes.particle2.mass;
+		life = particleTypes.particle2.life;
+		break;
+	case 2:
+		particlesToCreate = 4;
+		radius = particleTypes.particle1.radius;
+		mass = particleTypes.particle1.mass;
+		life = particleTypes.particle1.life;
+		break;
+	case 1:
+		particlesToCreate = 5;
+		radius = particleTypes.particle0.radius;
+		mass = particleTypes.particle0.mass;
+		life = particleTypes.particle0.life;
+		break;
+	case 0:
+		particlesToCreate = 0;
+		radius = 0;
+		break;
+	}
+
+	list <Firework*> fireworks;
+	for (int i = 0; i < particlesToCreate; i++) {
+		Vector3 velocity;
+		// c�lculo de la velocidad
+		velocity.x = rand() % 1;
+		velocity.y = rand() % 60 - 20;
+		velocity.z = rand() % 20 - 20;
+
+		fireworks.push_back(new Firework(parent->getPosition(), velocity, radius, mass,
+			&PxSphereGeometry(radius), parent->getGen() - 1, life));
+	}
+
+	return fireworks;
 }

@@ -43,6 +43,8 @@ public:
 	bool isAlive() { return alive; }
 	void setAlive(bool a) { alive = a; }
 
+	Vector3 getPosition() { return { _pose.p.x, _pose.p.y, _pose.p.z }; }
+
 private:
 	Vector3 vel;
 	float radius, particleLife = 100;

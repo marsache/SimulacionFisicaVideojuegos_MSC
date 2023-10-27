@@ -14,6 +14,7 @@ public:
 	~FireworkParticleGenerator() {}
 
 	Firework* generateParticle();
+	list<Firework*> createChildren(Firework* parent);
 
 private:
 	virtual list<Particle*> generateParticles();
