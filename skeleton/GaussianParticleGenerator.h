@@ -1,8 +1,10 @@
 #pragma once
 #include "ParticleGenerator.h"
+#include "ParticleInfo.h"
 #include <random>
 
 using namespace std;
+using namespace ParticleInfo;
 
 const int GAUSSIAN_PARTICLES = 1;
 const float PARTICLE_RADIUS = 0.06;

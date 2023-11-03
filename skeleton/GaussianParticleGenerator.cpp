@@ -4,13 +4,15 @@ GaussianParticleGenerator::GaussianParticleGenerator() : ParticleGenerator() {}
 
 list<Particle*> GaussianParticleGenerator::generateParticles() {
 	list<Particle*> particlesList;
+	ParticleTypes particleType;
 
 	std::random_device rd{};
 	std::mt19937 gen{ rd() };
 
 	//std::normal_distribution<double> d{ 5.0, 2.0 };
-	std::normal_distribution<double> pos{ 70.0, 10.0 };
-	std::normal_distribution<double> vel{ 0.0, 1.0 };
+	//std::normal_distribution<double> pos{ 70.0, 10.0 };
+	std::normal_distribution<double> pos{ particleType.gaussianParticle.positionMin.x, particleType.gaussianParticle.positionMax.x };
+	std::normal_distribution<double> vel{ particleType.gaussianParticle.velocityMin.x, particleType.gaussianParticle.velocityMax.x };
 
 	//auto random_double = [&d, &gen] { return d(gen); };
 
@@ -26,7 +28,8 @@ list<Particle*> GaussianParticleGenerator::generateParticles() {
 		meanVel.y = round(vel(gen));
 		meanVel.z = round(vel(gen));
 
-		particlesList.push_back(new Particle(meanPos, meanVel, PARTICLE_RADIUS, 5, &PxSphereGeometry(PARTICLE_RADIUS), 1, GAUSSIAN_PARTICLE_LIFE));
+		particlesList.push_back(new Particle(meanPos, meanVel, particleType.gaussianParticle.radius, particleType.gaussianParticle.mass, 
+			&PxSphereGeometry(particleType.gaussianParticle.radius), particleType.gaussianParticle.generation, GAUSSIAN_PARTICLE_LIFE));
 	}
 
 	return particlesList;
