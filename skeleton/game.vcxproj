@@ -262,6 +262,7 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleForceRegistry.cpp" />
     <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
@@ -281,6 +282,7 @@
     <ClInclude Include="GaussianParticleGenerator.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleForceRegistry.h" />
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ParticleInfo.h" />
     <ClInclude Include="ParticleSystem.h" />

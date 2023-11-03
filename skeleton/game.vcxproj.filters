@@ -22,6 +22,7 @@
     <ClCompile Include="FountainParticleGenerator.cpp" />
     <ClCompile Include="FireworkParticleGenerator.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
+    <ClCompile Include="ParticleForceRegistry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -46,6 +47,7 @@
     <ClInclude Include="FountainParticleGenerator.h" />
     <ClInclude Include="FireworkParticleGenerator.h" />
     <ClInclude Include="ForceGenerator.h" />
+    <ClInclude Include="ParticleForceRegistry.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -44,6 +44,7 @@ public:
 	void setAlive(bool a) { alive = a; }
 
 	Vector3 getPosition() { return { _pose.p.x, _pose.p.y, _pose.p.z }; }
+	void addForce(Vector3 f); // IMPLEMENTAR
 
 private:
 	Vector3 vel;
