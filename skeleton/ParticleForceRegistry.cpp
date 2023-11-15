@@ -73,5 +73,14 @@ void ParticleForceRegistry::deleteForceRegistry(ForceGenerator* f) {
 }
 
 void ParticleForceRegistry::updateForces() {
-
+	// recorre el map de particulas
+	auto itMapParticulas = particulas.begin();
+	while (itMapParticulas != particulas.end())
+	{
+		auto itFuerzaParticula = itMapParticulas->second.begin();
+		while (itFuerzaParticula != itMapParticulas->second.end()) {
+			// actualiza la fuerza
+			(*itFuerzaParticula)->updateForce(itMapParticulas->first);
+		}
+	}
 }
