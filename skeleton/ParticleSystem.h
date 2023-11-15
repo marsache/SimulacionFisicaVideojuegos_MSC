@@ -9,6 +9,10 @@
 #include "FireworkParticleGenerator.h"
 #include "JetParticleGenerator.h"
 
+#include "ParticleForceRegistry.h"
+#include "ForceGenerator.h"
+#include "GravityForce.h"
+
 using namespace std;
 
 //const int PARTICLE_RADIUS = 2;
@@ -22,6 +26,9 @@ private:
 	list<Particle*> particles;
 	list<Firework*> fireworks;
 	list<ParticleGenerator*> particleGenerators;
+
+	ParticleForceRegistry* particleForceRegistry;
+	list<ForceGenerator*> forceGenerators;
 
 public:
 	ParticleSystem();
@@ -38,4 +45,6 @@ public:
 	void createFountainParticleGenerator();
 	void createFireworkGenerator();
 	void createJetParticleGenerator();
+
+	void createGravityForce();
 };

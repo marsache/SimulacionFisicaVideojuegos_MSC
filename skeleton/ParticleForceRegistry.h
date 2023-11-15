@@ -22,4 +22,7 @@ public:
 	void deleteParticleRegistry(Particle* p);
 	void deleteForceRegistry(ForceGenerator* f);
 	void updateForces();
+	void addForce(ForceGenerator* f);
+	void updateParticles(double t);
+	void deleteDeadParticles();
 };

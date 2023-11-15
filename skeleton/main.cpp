@@ -146,6 +146,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'J':
 		particleSys->createJetParticleGenerator();
 		break;
+	case 'M':
+		particleSys->createGravityForce();
+		break;
 	case ' ':
 	{
 		break;

@@ -46,6 +46,8 @@ void ParticleForceRegistry::deleteParticleRegistry(Particle* p) {
 
 		// se elimina completamente la partícula del map de partículas
 		particulas.erase(itMapParticula);
+
+		//delete(p);
 	}
 }
 
@@ -69,18 +71,68 @@ void ParticleForceRegistry::deleteForceRegistry(ForceGenerator* f) {
 
 		// se elimina completamente la fuerza del map de fuerza
 		fuerzas.erase(itMapFuerzas);
+
+		//delete(f);
 	}
 }
 
+//void ParticleForceRegistry::updateForces() {
+//	// recorre el map de particulas
+//	auto itMapParticulas = particulas.begin();
+//	while (itMapParticulas != particulas.end())
+//	{
+//		auto itFuerzaParticula = itMapParticulas->second.begin();
+//		while (itFuerzaParticula != itMapParticulas->second.end()) {
+//			// actualiza la fuerza
+//			(*itFuerzaParticula)->updateForce(itMapParticulas->first);
+//		}
+//	}
+//}
+
 void ParticleForceRegistry::updateForces() {
-	// recorre el map de particulas
-	auto itMapParticulas = particulas.begin();
-	while (itMapParticulas != particulas.end())
+	// recorre el map de fuerzas
+	auto itMapFuerzas = fuerzas.begin();
+	while (itMapFuerzas != fuerzas.end())
 	{
-		auto itFuerzaParticula = itMapParticulas->second.begin();
-		while (itFuerzaParticula != itMapParticulas->second.end()) {
-			// actualiza la fuerza
-			(*itFuerzaParticula)->updateForce(itMapParticulas->first);
+		unordered_set<Particle*> newParticles = (*itMapFuerzas).first->generateParticles();
+		auto particles = newParticles.begin();
+		while (particles != newParticles.end()) {
+			(*itMapFuerzas).second.insert(*particles);
+
+			unordered_set<ForceGenerator*> lista;
+			lista.insert((*itMapFuerzas).first);
+			particulas.insert({ *particles, lista });
+
+			particles++;
 		}
+
+		itMapFuerzas++;
+	}
+}
+
+void ParticleForceRegistry::addForce(ForceGenerator* f) {
+	// sólo crea la fuerza si aún no existe
+	auto itFuerza = fuerzas.find(f);
+	if (itFuerza == fuerzas.end())
+		fuerzas.insert({ f, {} });
+}
+
+void ParticleForceRegistry::updateParticles(double t) {
+	for (auto particle : particulas) {
+		particle.first->integratev3(t);
+	}
+}
+
+void ParticleForceRegistry::deleteDeadParticles() {
+	auto particle = particulas.begin();
+	while (particle != particulas.end()) {
+		if (!(*particle).first->isAlive()) {
+			Particle* aux = (*particle).first;
+			particle++;
+			deleteParticleRegistry(aux);
+			delete(aux);
+		}
+		else
+			particle++;
 	}
 }

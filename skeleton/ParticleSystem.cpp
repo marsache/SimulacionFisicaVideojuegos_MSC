@@ -1,7 +1,7 @@
 #include "ParticleSystem.h"
 
 ParticleSystem::ParticleSystem() {
-
+	particleForceRegistry = new ParticleForceRegistry();
 }
 
 ParticleSystem::~ParticleSystem() {}
@@ -27,13 +27,20 @@ void ParticleSystem::update(double t) {
 	// se actualizan todas las partículas
 	for (auto itParticles : particles) 
 		itParticles->integratev2(t);
+		//itParticles->integratev2(t);
 
 	// se actualizan todos los fireworks
 	for (auto itFireworks : fireworks) 
 		itFireworks->integratev2(t);
 
+	// se actualizan todas las partículas afectadas por fuerzas
+	particleForceRegistry->updateForces();
+	particleForceRegistry->updateParticles(t);
+
+	particleForceRegistry->deleteDeadParticles();
+
 	// se eliminan las partículas muertas
-	deleteParticles();
+	deleteParticles(); 
 
 	// genera más fuegos artificiales
 	explode();
@@ -169,5 +176,28 @@ void ParticleSystem::createJetParticleGenerator() {
 		jetPG->setName("Jet");
 
 		particleGenerators.push_back(jetPG);
+	}
+}
+
+void ParticleSystem::createGravityForce() {
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Gravity") {
+			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			delete(*itFuerza);
+			forceGenerators.erase(itFuerza);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
+
+	if (!encontrado) {
+		GravityForce* gravityForce = new GravityForce(-10);
+		gravityForce->setName("Gravity");
+
+		forceGenerators.push_back(gravityForce);
+		particleForceRegistry->addForce(gravityForce);
 	}
 }
