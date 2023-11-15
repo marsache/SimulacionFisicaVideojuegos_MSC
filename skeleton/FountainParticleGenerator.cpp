@@ -5,7 +5,6 @@ list<Particle*> FountainParticleGenerator::generateParticles() {
 
 	for (int i = 0; i < FOUNTAIN_PARTICLES; ++i) {
 		// c�lculo de la posici�n
-		// como es nieve, las coordenadas y, z var�an mucho menos que la x
 		ParticleTypes particleType;
 		Vector3 position, velocity;
 

@@ -3,7 +3,3 @@
 ForceGenerator::ForceGenerator() {
 
 }
-
-void ForceGenerator::updateForce(Particle* p) {
-
-}

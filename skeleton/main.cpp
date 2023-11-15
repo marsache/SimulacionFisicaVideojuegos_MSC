@@ -143,6 +143,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'G':
 		particleSys->createFireworkGenerator();
 		break;
+	case 'J':
+		particleSys->createJetParticleGenerator();
+		break;
 	case ' ':
 	{
 		break;

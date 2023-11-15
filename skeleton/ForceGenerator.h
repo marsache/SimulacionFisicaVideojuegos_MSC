@@ -5,5 +5,5 @@ class ForceGenerator
 {
 public:
 	ForceGenerator();
-	void updateForce(Particle* p);
+	virtual void updateForce(Particle* p) {}
 };

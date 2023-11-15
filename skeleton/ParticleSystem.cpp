@@ -150,3 +150,24 @@ void ParticleSystem::createFireworkGenerator() {
 	FireworkParticleGenerator* fireworkParticleGenerator = new FireworkParticleGenerator();
 	fireworks.push_back(fireworkParticleGenerator->generateParticle());
 }
+
+void ParticleSystem::createJetParticleGenerator() {
+	auto it = particleGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && it != particleGenerators.end()) {
+		if ((*it)->getName() == "Jet") {
+			delete(*it);
+			particleGenerators.erase(it);
+			encontrado = true;
+		}
+		else
+			++it;
+	}
+
+	if (!encontrado) {
+		JetParticleGenerator* jetPG = new JetParticleGenerator();
+		jetPG->setName("Jet");
+
+		particleGenerators.push_back(jetPG);
+	}
+}

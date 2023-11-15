@@ -10,26 +10,26 @@ typedef physx::PxVec3 Vector3;
 typedef physx::PxVec4 Vector4;
 
 const double DAMPING = 0.6;
-const Vector3 ACCELERATION = Vector3(0, -20, 0);
+//const Vector3 ACCELERATION = Vector3(0, -20, 0);
 const Vector3 GRAVITY = Vector3(0, -10, 0);
 //const float PARTICLE_LIFE = 170.0;
 //const float PARTICLE_LIFE = 100.0;
 
-struct particleInfo {
-	Vector3 position1;
-	Vector3 position2;
-	Vector3 velocity1;
-	Vector3 velocity2;
-	float radius;
-	float mass;
-	PxGeometry* shape;
-	int generation;
-	float life;
-};
-
-struct particleTypes {
-	particleInfo particle3 = { Vector3(0, 0, 0), Vector3(5, 5, 5), Vector3(3, 3, 3), Vector3(7, 7, 7), 3, 1, &PxSphereGeometry(3), 1, 100 };
-};
+//struct particleInfo {
+//	Vector3 position1;
+//	Vector3 position2;
+//	Vector3 velocity1;
+//	Vector3 velocity2;
+//	float radius;
+//	float mass;
+//	PxGeometry* shape;
+//	int generation;
+//	float life;
+//};
+//
+//struct particleTypes {
+//	particleInfo particle3 = { Vector3(0, 0, 0), Vector3(5, 5, 5), Vector3(3, 3, 3), Vector3(7, 7, 7), 3, 1, &PxSphereGeometry(3), 1, 100 };
+//};
 
 class Particle
 {
@@ -44,10 +44,10 @@ public:
 	void setAlive(bool a) { alive = a; }
 
 	Vector3 getPosition() { return { _pose.p.x, _pose.p.y, _pose.p.z }; }
-	void addForce(Vector3 f); // IMPLEMENTAR
+	void addForce(Vector3 f) { acceleration += f; }
 
 private:
-	Vector3 vel;
+	Vector3 vel, acceleration;
 	float radius, particleLife = 100;
 	int mass;
 	physx::PxTransform _pose;
