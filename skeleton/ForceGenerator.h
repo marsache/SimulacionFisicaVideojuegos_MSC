@@ -12,7 +12,7 @@ protected:
 public:
 	ForceGenerator();
 	virtual void updateForce(Particle* p) {};
-	virtual unordered_set<Particle*> generateParticles() = 0;
+	//virtual unordered_set<Particle*> generateParticles() = 0;
 
 	void setName(string _name) { name = _name; }
 	string getName() { return name; }
