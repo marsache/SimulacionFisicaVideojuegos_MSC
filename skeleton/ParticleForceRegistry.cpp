@@ -1,4 +1,4 @@
-#include "ParticleForceRegistry.h"
+Ôªø#include "ParticleForceRegistry.h"
 
 void ParticleForceRegistry::addRegistry(ForceGenerator* f, Particle* p) {
 	// se actualiza el map de fuerzas
@@ -7,44 +7,44 @@ void ParticleForceRegistry::addRegistry(ForceGenerator* f, Particle* p) {
 	if (itMapFuerzas == fuerzas.end()) {
 		ListaParticulasPorFuerza lista;
 		lista.insert(p);
-		fuerzas.insert({ f, lista }); // se inserta la fuerza y la partÌcula
+		fuerzas.insert({ f, lista }); // se inserta la fuerza y la part√≠cula
 	}
-	// si ya existe la fuerza, se aÒade la partÌcula
+	// si ya existe la fuerza, se a√±ade la part√≠cula
 	else 
-		itMapFuerzas->second.insert(p); // se inserta la partÌcula
+		itMapFuerzas->second.insert(p); // se inserta la part√≠cula
 
-	// se actualiza el map de partÌculas
+	// se actualiza el map de part√≠culas
 	auto itMapParticulas = particulas.find(p);
 	// si no se ha registrado ya la fuerza, se crea
 	if (itMapParticulas == particulas.end()) {
 		ListaFuerzasPorParticula lista;
 		lista.insert(f);
-		particulas.insert({ p, lista }); // se inserta la partÌcula y la fuerza
+		particulas.insert({ p, lista }); // se inserta la part√≠cula y la fuerza
 	}
-	// si ya existe la partÌcula, se aÒade la fuerza
+	// si ya existe la part√≠cula, se a√±ade la fuerza
 	else
 		itMapParticulas->second.insert(f);
 }
 
 void ParticleForceRegistry::deleteParticleRegistry(Particle* p) {
-	// se elimina la partÌcula de todas las fuerzas que tiene
+	// se elimina la part√≠cula de todas las fuerzas que tiene
 	// (se elimina del map de fuerzas)
 	auto itMapParticula = particulas.find(p); // coste constante
-	// sÛlo se procesa la partÌcula si esta existe
+	// s√≥lo se procesa la part√≠cula si esta existe
 	if (itMapParticula != particulas.end()) {
-		// se recorre la lista de fuerzas que afectan a la partÌcula
+		// se recorre la lista de fuerzas que afectan a la part√≠cula
 		auto itListaFuerzas = itMapParticula->second.begin();
-		while (itListaFuerzas != itMapParticula->second.end()) { // coste lineal en funciÛn del n˙mero de fuerzas que afectan a la partÌcula
+		while (itListaFuerzas != itMapParticula->second.end()) { // coste lineal en funci√≥n del n√∫mero de fuerzas que afectan a la part√≠cula
 			// se modifica el map de fuerzas
 			auto itMapFuerzas = fuerzas.find(*itListaFuerzas); // coste constante
-			// se busca la partÌcula a la que afecta la fuerza
+			// se busca la part√≠cula a la que afecta la fuerza
 			auto itListaParticulas = itMapFuerzas->second.find(p); // coste constante
 			if (itListaParticulas != itMapFuerzas->second.end())
 				itMapFuerzas->second.erase(itListaParticulas);
 			itListaFuerzas++;
 		}
 
-		// se elimina completamente la partÌcula del map de partÌculas
+		// se elimina completamente la part√≠cula del map de part√≠culas
 		particulas.erase(itMapParticula);
 
 		//delete(p);
@@ -52,21 +52,21 @@ void ParticleForceRegistry::deleteParticleRegistry(Particle* p) {
 }
 
 void ParticleForceRegistry::deleteForceRegistry(ForceGenerator* f) {
-	// se elimina la fuerza de todas las partÌculas que la tienen
-	// (se elimina del map de partÌculas)
+	// se elimina la fuerza de todas las part√≠culas que la tienen
+	// (se elimina del map de part√≠culas)
 	auto itMapFuerzas = fuerzas.find(f); // coste constante
-	// sÛlo se procesa la fuerza si esta existe
+	// s√≥lo se procesa la fuerza si esta existe
 	if (itMapFuerzas != fuerzas.end()) {
-		// se recorre la lista de partÌculas a las que afecta la fuerza
-		auto itListaPartÌculas = itMapFuerzas->second.begin();
-		while (itListaPartÌculas != itMapFuerzas->second.end()) { // coste lineal en funciÛn del n˙mero de fuerzas que afectan a la partÌcula
-			// se modifica el map de partÌculas
-			auto itMapParticulas = particulas.find(*itListaPartÌculas); // coste constante
-			// se busca la fuerza a la que afecta a la partÌcula
+		// se recorre la lista de part√≠culas a las que afecta la fuerza
+		auto itListaPart√≠culas = itMapFuerzas->second.begin();
+		while (itListaPart√≠culas != itMapFuerzas->second.end()) { // coste lineal en funci√≥n del n√∫mero de fuerzas que afectan a la part√≠cula
+			// se modifica el map de part√≠culas
+			auto itMapParticulas = particulas.find(*itListaPart√≠culas); // coste constante
+			// se busca la fuerza a la que afecta a la part√≠cula
 			auto itListaFuerzas = itMapParticulas->second.find(f); // coste constante
 			if (itListaFuerzas != itMapParticulas->second.end())
 				itMapParticulas->second.erase(itListaFuerzas);
-			itListaPartÌculas++;
+			itListaPart√≠culas++;
 		}
 
 		// se elimina completamente la fuerza del map de fuerza
@@ -76,42 +76,44 @@ void ParticleForceRegistry::deleteForceRegistry(ForceGenerator* f) {
 	}
 }
 
-//void ParticleForceRegistry::updateForces() {
-//	// recorre el map de particulas
-//	auto itMapParticulas = particulas.begin();
-//	while (itMapParticulas != particulas.end())
-//	{
-//		auto itFuerzaParticula = itMapParticulas->second.begin();
-//		while (itFuerzaParticula != itMapParticulas->second.end()) {
-//			// actualiza la fuerza
-//			(*itFuerzaParticula)->updateForce(itMapParticulas->first);
-//		}
-//	}
-//}
-
 void ParticleForceRegistry::updateForces() {
-	// recorre el map de fuerzas
-	auto itMapFuerzas = fuerzas.begin();
-	while (itMapFuerzas != fuerzas.end())
+	// recorre el map de particulas
+	auto itMapParticulas = particulas.begin();
+	while (itMapParticulas != particulas.end())
 	{
-		unordered_set<Particle*> newParticles = (*itMapFuerzas).first->generateParticles();
-		auto particles = newParticles.begin();
-		while (particles != newParticles.end()) {
-			(*itMapFuerzas).second.insert(*particles);
-
-			unordered_set<ForceGenerator*> lista;
-			lista.insert((*itMapFuerzas).first);
-			particulas.insert({ *particles, lista });
-
-			particles++;
+		auto itFuerzaParticula = itMapParticulas->second.begin();
+		while (itFuerzaParticula != itMapParticulas->second.end()) {
+			// actualiza la fuerza
+			(*itFuerzaParticula)->updateForce(itMapParticulas->first);
+			++itFuerzaParticula;
 		}
-
-		itMapFuerzas++;
+		++itMapParticulas;
 	}
 }
 
+//void ParticleForceRegistry::updateForces() {
+//	// recorre el map de fuerzas
+//	auto itMapFuerzas = fuerzas.begin();
+//	while (itMapFuerzas != fuerzas.end())
+//	{
+//		unordered_set<Particle*> newParticles = (*itMapFuerzas).first->generateParticles();
+//		auto particles = newParticles.begin();
+//		while (particles != newParticles.end()) {
+//			(*itMapFuerzas).second.insert(*particles);
+//
+//			unordered_set<ForceGenerator*> lista;
+//			lista.insert((*itMapFuerzas).first);
+//			particulas.insert({ *particles, lista });
+//
+//			particles++;
+//		}
+//
+//		itMapFuerzas++;
+//	}
+//}
+
 void ParticleForceRegistry::addForce(ForceGenerator* f) {
-	// sÛlo crea la fuerza si a˙n no existe
+	// s√≥lo crea la fuerza si a√∫n no existe
 	auto itFuerza = fuerzas.find(f);
 	if (itFuerza == fuerzas.end())
 		fuerzas.insert({ f, {} });
@@ -134,5 +136,28 @@ void ParticleForceRegistry::deleteDeadParticles() {
 		}
 		else
 			particle++;
+	}
+}
+
+void ParticleForceRegistry::generateParticles(ForceGenerator* f) {
+	// creaci√≥n de una fuente como n√∫cleo de part√≠culas gen√©ricas sobre las que probar las fuerzas
+	for (int i = 0; i < NUM_PARTICLES; ++i) {
+		// c√°lculo de la posici√≥n
+		ParticleTypes particleType;
+		Vector3 position, velocity;
+
+		position.x = rand() % int(particleType.jetParticle.positionMin.x) + int(particleType.jetParticle.positionMin.x);
+		position.y = rand() % int(particleType.jetParticle.positionMax.y) + int(particleType.jetParticle.positionMin.y);
+		position.z = rand() % int(particleType.jetParticle.positionMax.z) + int(particleType.jetParticle.positionMin.z);
+
+		// generaci√≥n de la velocidad
+		velocity.x = rand() % int(particleType.jetParticle.velocityMin.x) + int(particleType.jetParticle.velocityMax.x);
+		velocity.y = rand() % int(particleType.jetParticle.velocityMin.y) + int(particleType.jetParticle.velocityMax.y);
+		velocity.z = rand() % int(particleType.jetParticle.velocityMin.z) + int(particleType.jetParticle.velocityMax.z);
+
+		Particle* particle = new Particle(position, velocity, particleType.jetParticle.radius, particleType.jetParticle.mass,
+			&PxSphereGeometry(particleType.jetParticle.radius), particleType.jetParticle.generation, particleType.jetParticle.life);
+
+		addRegistry(f, particle);
 	}
 }

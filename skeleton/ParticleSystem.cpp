@@ -33,6 +33,11 @@ void ParticleSystem::update(double t) {
 	for (auto itFireworks : fireworks) 
 		itFireworks->integratev2(t);
 
+	// se añaden partículas afectadas por fuerzas
+	// se recorre la lista de fuerzas para ir creando partículas para cada fuerza
+	for (auto itForce : forceGenerators)
+		particleForceRegistry->generateParticles(itForce);
+
 	// se actualizan todas las partículas afectadas por fuerzas
 	particleForceRegistry->updateForces();
 	particleForceRegistry->updateParticles(t);

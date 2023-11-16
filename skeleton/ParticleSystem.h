@@ -1,6 +1,7 @@
 #pragma once
 
 #include <list>
+#include <unordered_set>
 #include "Particle.h"
 #include "ParticleGenerator.h"
 #include "GaussianParticleGenerator.h"
@@ -29,6 +30,7 @@ private:
 
 	ParticleForceRegistry* particleForceRegistry;
 	list<ForceGenerator*> forceGenerators;
+	unordered_set<Particle*> particlesWForces;
 
 public:
 	ParticleSystem();

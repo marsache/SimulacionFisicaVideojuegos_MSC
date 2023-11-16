@@ -25,7 +25,7 @@ unordered_set<Particle*> GravityForce::generateParticles() {
 			&PxSphereGeometry(particleType.jetParticle.radius), particleType.jetParticle.generation, particleType.jetParticle.life);
 
 		// se le añade la fuerza
-		updateForce(particle);
+		//updateForce(particle);
 
 		particlesList.insert(particle);
 	}

@@ -3,8 +3,12 @@
 #include <unordered_set>
 #include "ForceGenerator.h"
 #include "Particle.h"
+#include "ParticleInfo.h"
 
 using namespace std;
+using namespace ParticleInfo;
+
+const int NUM_PARTICLES = 3;
 
 using ListaParticulasPorFuerza = unordered_set<Particle*>;
 using ListaFuerzasPorParticula = unordered_set<ForceGenerator*>;
@@ -25,4 +29,5 @@ public:
 	void addForce(ForceGenerator* f);
 	void updateParticles(double t);
 	void deleteDeadParticles();
+	void generateParticles(ForceGenerator* f);
 };
