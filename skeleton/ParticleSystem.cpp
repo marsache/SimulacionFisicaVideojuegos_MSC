@@ -35,8 +35,12 @@ void ParticleSystem::update(double t) {
 
 	// se añaden partículas afectadas por fuerzas
 	// se recorre la lista de fuerzas para ir creando partículas para cada fuerza
-	for (auto itForce : forceGenerators)
-		particleForceRegistry->generateParticles(itForce);
+	for (auto itForce : forceGenerators) {
+		if (itForce->getName() == "Whirlwind")
+			particleForceRegistry->generateStaticParticles(itForce);
+		else
+			particleForceRegistry->generateParticles(itForce);
+	}
 
 	// se actualizan todas las partículas afectadas por fuerzas
 	particleForceRegistry->updateForces();
@@ -227,5 +231,28 @@ void ParticleSystem::createWindForce() {
 
 		forceGenerators.push_back(windForce);
 		particleForceRegistry->addForce(windForce);
+	}
+}
+
+void ParticleSystem::createWhirlwindForce() {
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Whirlwind") {
+			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			delete(*itFuerza);
+			forceGenerators.erase(itFuerza);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
+
+	if (!encontrado) {
+		WhirlwindForce* whirlwindForce = new WhirlwindForce(1);
+		whirlwindForce->setName("Whirlwind");
+
+		forceGenerators.push_back(whirlwindForce);
+		particleForceRegistry->addForce(whirlwindForce);
 	}
 }

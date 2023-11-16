@@ -2,12 +2,15 @@
 #include "ForceGenerator.h"
 #include "ParticleInfo.h"
 #include <unordered_set>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 using namespace std;
 using namespace ParticleInfo;
 
 const int WIND_PARTICLES = 4;
 const int RADIUS_INFLUENCED_AREA = 70;
+const float AIR_DENSITY = 1.2;
 const Vector4 COLOR = Vector4(0.0, 255.0, 0.0, 0.5);
 
 class WindForce : public ForceGenerator

@@ -6,8 +6,6 @@
 using namespace std;
 using namespace ParticleInfo;
 
-const int GRAVITY_PARTICLES = 1;
-
 class GravityForce : public ForceGenerator
 {
 public:

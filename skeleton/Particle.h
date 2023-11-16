@@ -35,6 +35,7 @@ public:
 		vel = iniVel; 
 	}
 	Vector3 getVel() { return vel; }
+	float getRadius() { return radius; }
 
 private:
 	Vector3 vel, forces, acceleration, iniVel;

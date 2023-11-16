@@ -30,4 +30,5 @@ public:
 	void updateParticles(double t);
 	void deleteDeadParticles();
 	void generateParticles(ForceGenerator* f);
+	void generateStaticParticles(ForceGenerator* f);
 };

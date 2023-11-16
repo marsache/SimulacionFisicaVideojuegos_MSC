@@ -14,6 +14,7 @@
 #include "ForceGenerator.h"
 #include "GravityForce.h"
 #include "WindForce.h"
+#include "WhirlwindForce.h"
 
 using namespace std;
 
@@ -51,4 +52,5 @@ public:
 
 	void createGravityForce();
 	void createWindForce();
+	void createWhirlwindForce();
 };

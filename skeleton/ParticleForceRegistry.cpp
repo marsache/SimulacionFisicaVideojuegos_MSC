@@ -161,3 +161,24 @@ void ParticleForceRegistry::generateParticles(ForceGenerator* f) {
 		addRegistry(f, particle);
 	}
 }
+
+void ParticleForceRegistry::generateStaticParticles(ForceGenerator* f) {
+	// creación de una fuente como núcleo de partículas genéricas sobre las que probar las fuerzas
+	for (int i = 0; i < NUM_PARTICLES; ++i) {
+		// cálculo de la posición
+		ParticleTypes particleType;
+		Vector3 position, velocity;
+
+		position.x = rand() % int(particleType.jetParticle.positionMin.x) + int(particleType.jetParticle.positionMin.x);
+		position.y = rand() % int(particleType.jetParticle.positionMax.y) + int(particleType.jetParticle.positionMin.y);
+		position.z = rand() % int(particleType.jetParticle.positionMax.z) + int(particleType.jetParticle.positionMin.z);
+
+		// generación de la velocidad
+		velocity = { 0, 0, 0 };
+
+		Particle* particle = new Particle(position, velocity, particleType.jetParticle.radius, particleType.jetParticle.mass,
+			&PxSphereGeometry(particleType.jetParticle.radius), particleType.jetParticle.generation, particleType.jetParticle.life);
+
+		addRegistry(f, particle);
+	}
+}
