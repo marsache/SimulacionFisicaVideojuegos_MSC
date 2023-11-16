@@ -13,6 +13,7 @@
 #include "ParticleForceRegistry.h"
 #include "ForceGenerator.h"
 #include "GravityForce.h"
+#include "WindForce.h"
 
 using namespace std;
 
@@ -49,4 +50,5 @@ public:
 	void createJetParticleGenerator();
 
 	void createGravityForce();
+	void createWindForce();
 };

@@ -30,10 +30,14 @@ public:
 
 	Vector3 getPosition() { return { _pose.p.x, _pose.p.y, _pose.p.z }; }
 	void addForce(Vector3 f) { forces += f; }
-	void clearAcum() { forces = { 0,0,0 }; }
+	void clearAcum() { 
+		forces = { 0, 0, 0 }; 
+		vel = iniVel; 
+	}
+	Vector3 getVel() { return vel; }
 
 private:
-	Vector3 vel, forces, acceleration;
+	Vector3 vel, forces, acceleration, iniVel;
 	float radius, particleLife = 100;
 	int mass;
 	physx::PxTransform _pose;

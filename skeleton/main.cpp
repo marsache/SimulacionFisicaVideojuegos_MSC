@@ -149,6 +149,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'M':
 		particleSys->createGravityForce();
 		break;
+	case 'V':
+		particleSys->createWindForce();
+		break;
 	case ' ':
 	{
 		break;

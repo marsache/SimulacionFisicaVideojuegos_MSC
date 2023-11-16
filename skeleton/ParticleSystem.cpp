@@ -206,3 +206,26 @@ void ParticleSystem::createGravityForce() {
 		particleForceRegistry->addForce(gravityForce);
 	}
 }
+
+void ParticleSystem::createWindForce() {
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Wind") {
+			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			delete(*itFuerza);
+			forceGenerators.erase(itFuerza);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
+
+	if (!encontrado) {
+		WindForce* windForce = new WindForce(1000);
+		windForce->setName("Wind");
+
+		forceGenerators.push_back(windForce);
+		particleForceRegistry->addForce(windForce);
+	}
+}
