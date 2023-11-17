@@ -8,6 +8,7 @@ using namespace std;
 using namespace ParticleInfo;
 
 const int MAX_HEIGHT = 0;
+const float K_WHIRLWIND = 0.05;
 
 class WhirlwindForce : public ForceGenerator
 {

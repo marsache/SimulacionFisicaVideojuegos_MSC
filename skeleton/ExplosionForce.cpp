@@ -10,7 +10,7 @@ void ExplosionForce::updateForce(Particle* p, double t) {
 		Vector3 differenceRadius = p->getPosition() - core;
 		float differenceRadiusMagnitude = differenceRadius.magnitude();
 		if (differenceRadiusMagnitude < EXPLOSION_RADIUS) {
-			Vector3 force = (1000 / pow(differenceRadiusMagnitude, 2)) * differenceRadius * exp(-elapsedTimeExplosion / 500);
+			Vector3 force = (K_EXPLOSION / pow(differenceRadiusMagnitude, 2)) * differenceRadius * exp(-elapsedTimeExplosion / TAU);
 			p->addForce(force);
 		}
 	}

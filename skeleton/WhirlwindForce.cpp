@@ -9,5 +9,5 @@ void WhirlwindForce::updateForce(Particle* p, double t) {
 		force.y = 50 - (p->getPosition().y - influencedArea.p.y);
 	force.z = p->getPosition().x - influencedArea.p.x;
 
-	p->addForce(0.05 * force);
+	p->addForce(K_WHIRLWIND * force);
 }
