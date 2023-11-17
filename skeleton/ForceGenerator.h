@@ -11,7 +11,7 @@ protected:
 	string name;
 public:
 	ForceGenerator();
-	virtual void updateForce(Particle* p) {};
+	virtual void updateForce(Particle* p, double t) {};
 	//virtual unordered_set<Particle*> generateParticles() = 0;
 
 	void setName(string _name) { name = _name; }

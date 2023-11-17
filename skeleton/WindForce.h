@@ -26,5 +26,5 @@ public:
 		renderInfluenceArea = new RenderItem(shape, &influencedArea, COLOR);
 	}
 
-	virtual void updateForce(Particle* p);
+	virtual void updateForce(Particle* p, double t);
 };

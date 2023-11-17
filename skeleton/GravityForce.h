@@ -10,7 +10,7 @@ class GravityForce : public ForceGenerator
 {
 public:
 	GravityForce(int _acceleration) : acceleration(0, _acceleration, 0) {}
-	virtual void updateForce(Particle* p);
+	virtual void updateForce(Particle* p, double t);
 	//virtual unordered_set<Particle*> generateParticles();
 
 protected:

@@ -76,7 +76,7 @@ void ParticleForceRegistry::deleteForceRegistry(ForceGenerator* f) {
 	}
 }
 
-void ParticleForceRegistry::updateForces() {
+void ParticleForceRegistry::updateForces(double t) {
 	// recorre el map de particulas
 	auto itMapParticulas = particulas.begin();
 	while (itMapParticulas != particulas.end())
@@ -84,7 +84,7 @@ void ParticleForceRegistry::updateForces() {
 		auto itFuerzaParticula = itMapParticulas->second.begin();
 		while (itFuerzaParticula != itMapParticulas->second.end()) {
 			// actualiza la fuerza
-			(*itFuerzaParticula)->updateForce(itMapParticulas->first);
+			(*itFuerzaParticula)->updateForce(itMapParticulas->first, t);
 			++itFuerzaParticula;
 		}
 		++itMapParticulas;
@@ -178,6 +178,27 @@ void ParticleForceRegistry::generateStaticParticles(ForceGenerator* f) {
 
 		Particle* particle = new Particle(position, velocity, particleType.jetParticle.radius, particleType.jetParticle.mass,
 			&PxSphereGeometry(particleType.jetParticle.radius), particleType.jetParticle.generation, particleType.jetParticle.life);
+
+		addRegistry(f, particle);
+	}
+}
+
+void ParticleForceRegistry::generateExplosionParticles(ForceGenerator* f) {
+	// creación de una fuente como núcleo de partículas genéricas sobre las que probar las fuerzas
+	for (int i = 0; i < NUM_PARTICLES; ++i) {
+		// cálculo de la posición
+		ParticleTypes particleType;
+		Vector3 position, velocity;
+
+		position.x = rand() % int(particleType.jetParticleExplosion.positionMin.x) + int(particleType.jetParticleExplosion.positionMin.x);
+		position.y = rand() % int(particleType.jetParticleExplosion.positionMax.y) + int(particleType.jetParticleExplosion.positionMin.y);
+		position.z = rand() % int(particleType.jetParticleExplosion.positionMax.z) + int(particleType.jetParticleExplosion.positionMin.z);
+
+		// generación de la velocidad
+		velocity = { 0, 0, 0 };
+
+		Particle* particle = new Particle(position, velocity, particleType.jetParticleExplosion.radius, particleType.jetParticleExplosion.mass,
+			&PxSphereGeometry(particleType.jetParticleExplosion.radius), particleType.jetParticleExplosion.generation, particleType.jetParticleExplosion.life);
 
 		addRegistry(f, particle);
 	}

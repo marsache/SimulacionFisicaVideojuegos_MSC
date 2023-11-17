@@ -155,6 +155,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'C':
 		particleSys->createWhirlwindForce();
 		break;
+	case 'U':
+		particleSys->createExplosionForce();
+		break;
 	case ' ':
 	{
 		break;

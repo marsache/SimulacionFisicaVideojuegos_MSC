@@ -1,6 +1,6 @@
 #include "WindForce.h"
 
-void WindForce::updateForce(Particle* p) {
+void WindForce::updateForce(Particle* p, double t) {
 	// la fuerza sólo se aplica si la partícula se encuentra en el área de influencia
 	Vector3 posIArea;
 	posIArea.x = influencedArea.p.x;

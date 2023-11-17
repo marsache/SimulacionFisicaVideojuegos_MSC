@@ -38,12 +38,14 @@ void ParticleSystem::update(double t) {
 	for (auto itForce : forceGenerators) {
 		if (itForce->getName() == "Whirlwind")
 			particleForceRegistry->generateStaticParticles(itForce);
+		else if (itForce->getName() == "Explosion")
+			particleForceRegistry->generateExplosionParticles(itForce);
 		else
 			particleForceRegistry->generateParticles(itForce);
 	}
 
 	// se actualizan todas las partículas afectadas por fuerzas
-	particleForceRegistry->updateForces();
+	particleForceRegistry->updateForces(t);
 	particleForceRegistry->updateParticles(t);
 
 	particleForceRegistry->deleteDeadParticles();
@@ -254,5 +256,28 @@ void ParticleSystem::createWhirlwindForce() {
 
 		forceGenerators.push_back(whirlwindForce);
 		particleForceRegistry->addForce(whirlwindForce);
+	}
+}
+
+void ParticleSystem::createExplosionForce() {
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Explosion") {
+			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			delete(*itFuerza);
+			forceGenerators.erase(itFuerza);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
+
+	if (!encontrado) {
+		ExplosionForce* explosionForce = new ExplosionForce();
+		explosionForce->setName("Explosion");
+
+		forceGenerators.push_back(explosionForce);
+		particleForceRegistry->addForce(explosionForce);
 	}
 }

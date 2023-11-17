@@ -1,6 +1,6 @@
 ﻿#include "GravityForce.h"
 
-void GravityForce::updateForce(Particle* p) {
+void GravityForce::updateForce(Particle* p, double t) {
 	ParticleTypes particleType;
 	p->addForce(acceleration * particleType.jetParticle.mass);
 }

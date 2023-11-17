@@ -1,6 +1,6 @@
 #include "WhirlwindForce.h"
 
-void WhirlwindForce::updateForce(Particle* p) {
+void WhirlwindForce::updateForce(Particle* p, double t) {
 	Vector3 force;
 	force.x = -(p->getPosition().z - influencedArea.p.z);
 	if (p->getPosition().y >= influencedArea.p.y + MAX_HEIGHT)
