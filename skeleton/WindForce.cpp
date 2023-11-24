@@ -19,6 +19,6 @@ void WindForce::updateForce(Particle* p, double t) {
 			(A * 0.5 * AIR_DENSITY) * (acceleration - p->getVel()).magnitude() * (acceleration - p->getVel()));
 		p->addForce(0.5 * (acceleration - p->getVel()) + 0.5 * (acceleration - p->getVel()).magnitude() * (acceleration - p->getVel()));*/
 	}
-	else
-		p->clearAcum();
+	/*else
+		p->clearAcum();*/
 }
