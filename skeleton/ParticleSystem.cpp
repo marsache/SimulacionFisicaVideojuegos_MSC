@@ -299,37 +299,54 @@ void ParticleSystem::generateSpringForce() {
 			++itFuerza;
 	}
 
-	Particle* p1 = new Particle(Vector3(-10, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
-	Particle* p2 = new Particle(Vector3(20, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+	if (!encontrado) {
+		Particle* p1 = new Particle(Vector3(-10, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+		Particle* p2 = new Particle(Vector3(20, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
 
-	SpringForceGenerator* f1 = new SpringForceGenerator(10, 20, p2);
-	f1->setName("Spring1");
+		SpringForceGenerator* f1 = new SpringForceGenerator(10, 20, p2);
+		f1->setName("Spring1");
 
-	forceGenerators.push_back(f1);
+		forceGenerators.push_back(f1);
 
-	particleForceRegistry->addRegistry(f1, p1);
+		particleForceRegistry->addRegistry(f1, p1);
 
-	particlesWForces.insert(p1);
-	particles.push_back(p2);
+		particlesWForces.insert(p1);
+		particles.push_back(p2);
+	}
 }
 
 void ParticleSystem::generateDoubleSpringForce() {
-	Particle* p1 = new Particle(Vector3(-30, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
-	Particle* p2 = new Particle(Vector3(30, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Spring2") {
+			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			delete(*itFuerza);
+			forceGenerators.erase(itFuerza);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
 
-	SpringForceGenerator* f1 = new SpringForceGenerator(10, 30, p2);
-	f1->setName("Spring1");
-	SpringForceGenerator* f2 = new SpringForceGenerator(10, 30, p1);
-	f2->setName("Spring2");
+	if (!encontrado) {
+		Particle* p1 = new Particle(Vector3(-30, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+		Particle* p2 = new Particle(Vector3(30, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
 
-	forceGenerators.push_back(f1);
-	forceGenerators.push_back(f2);
+		SpringForceGenerator* f1 = new SpringForceGenerator(10, 30, p2);
+		f1->setName("Spring2");
+		SpringForceGenerator* f2 = new SpringForceGenerator(10, 30, p1);
+		f2->setName("Spring2");
 
-	particleForceRegistry->addRegistry(f1, p1);
-	particleForceRegistry->addRegistry(f2, p2);
+		forceGenerators.push_back(f1);
+		forceGenerators.push_back(f2);
 
-	particlesWForces.insert(p1);
-	particlesWForces.insert(p2);
+		particleForceRegistry->addRegistry(f1, p1);
+		particleForceRegistry->addRegistry(f2, p2);
+
+		particlesWForces.insert(p1);
+		particlesWForces.insert(p2);
+	}
 }
 
 void ParticleSystem::increaseKSpring() {
