@@ -60,4 +60,6 @@ public:
 
 	void generateSpringForce();
 	void generateDoubleSpringForce();
+	void increaseKSpring();
+	void decreaseKSpring();
 };

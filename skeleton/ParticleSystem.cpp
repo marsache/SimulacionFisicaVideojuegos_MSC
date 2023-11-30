@@ -284,6 +284,19 @@ void ParticleSystem::createExplosionForce() {
 }
 
 void ParticleSystem::generateSpringForce() {
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Spring1") {
+			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			delete(*itFuerza);
+			forceGenerators.erase(itFuerza);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
+
 	Particle* p1 = new Particle(Vector3(-10, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
 	Particle* p2 = new Particle(Vector3(20, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
 
@@ -315,4 +328,30 @@ void ParticleSystem::generateDoubleSpringForce() {
 
 	particlesWForces.insert(p1);
 	particlesWForces.insert(p2);
+}
+
+void ParticleSystem::increaseKSpring() {
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Spring1") {
+			(*itFuerza)->setK((*itFuerza)->getK() + 1);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
+}
+
+void ParticleSystem::decreaseKSpring() {
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Spring1") {
+			(*itFuerza)->setK((*itFuerza)->getK() - 1);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
 }

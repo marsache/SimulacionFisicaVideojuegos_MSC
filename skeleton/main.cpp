@@ -161,6 +161,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'O':
 		particleSys->generateSpringForce();
 		break;
+	case 'Q':
+		particleSys->decreaseKSpring();
+		break;
+	case 'E':
+		particleSys->decreaseKSpring();
+		break;
 	case ' ':
 	{
 		break;

@@ -9,6 +9,8 @@ class ForceGenerator
 {
 protected:
 	string name;
+	double k; // constante elástica
+
 public:
 	ForceGenerator();
 	virtual void updateForce(Particle* p, double t) {};
@@ -16,4 +18,7 @@ public:
 
 	void setName(string _name) { name = _name; }
 	string getName() { return name; }
+
+	inline void setK(double _k) { k = _k; }
+	inline double getK() { return k; }
 };
