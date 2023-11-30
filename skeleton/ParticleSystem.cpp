@@ -349,6 +349,37 @@ void ParticleSystem::generateDoubleSpringForce() {
 	}
 }
 
+void ParticleSystem::generateBuoyancyForce() {
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Buoyancy") {
+			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			delete(*itFuerza);
+			forceGenerators.erase(itFuerza);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
+
+	if (!encontrado) {
+		Particle* p1 = new Particle(Vector3(0, 40, 0), Vector3(0, 0, 0), 10, 100, &PxBoxGeometry(10, 10, 10), 1, -1);
+		Particle* p2 = new Particle(Vector3(30, 0, 0), Vector3(0, 0, 0), 10, 100, &PxBoxGeometry(70, 5, 70), 1, -1);
+		p2->setColor(Vector4(0, 255, 255, 1));
+
+		BuoyancyForceGenerator* f1 = new BuoyancyForceGenerator(10, 1000, 1000, p2);
+		f1->setName("Buoyancy");
+
+		forceGenerators.push_back(f1);
+
+		particleForceRegistry->addRegistry(f1, p1);
+
+		particlesWForces.insert(p1);
+		particles.push_back(p2);
+	}
+}
+
 void ParticleSystem::increaseKSpring() {
 	auto itFuerza = forceGenerators.begin();
 	bool encontrado = false;

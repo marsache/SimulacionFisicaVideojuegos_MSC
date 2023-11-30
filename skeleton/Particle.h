@@ -37,6 +37,8 @@ public:
 	Vector3 getVel() { return vel; }
 	float getRadius() { return radius; }
 
+	void setColor(Vector4 _color) { renderItem->color = _color; }
+
 private:
 	Vector3 vel, forces, acceleration, iniVel;
 	float radius, particleLife = 100;

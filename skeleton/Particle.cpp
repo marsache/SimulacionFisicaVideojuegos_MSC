@@ -40,6 +40,7 @@ void Particle::integratev2(double t) {
 void Particle::integratev3(double t) {
 	float aux = 1.0 / mass;
 	acceleration = forces * aux;
+	//vel *= pow(DAMPING, t);
 	vel += acceleration * t;
 	_pose.p += vel * t;
 

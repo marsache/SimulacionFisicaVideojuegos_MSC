@@ -170,6 +170,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'E':
 		particleSys->decreaseKSpring();
 		break;
+	case 'L':
+		particleSys->generateBuoyancyForce();
+		break;
 	case ' ':
 	{
 		break;

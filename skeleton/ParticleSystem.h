@@ -18,6 +18,7 @@
 #include "ExplosionForce.h"
 
 #include "SpringForceGenerator.h"
+#include "BuoyancyForceGenerator.h"
 
 using namespace std;
 
@@ -60,6 +61,7 @@ public:
 
 	void generateSpringForce();
 	void generateDoubleSpringForce();
+	void generateBuoyancyForce();
 	void increaseKSpring();
 	void decreaseKSpring();
 };
