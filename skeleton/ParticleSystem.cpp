@@ -209,7 +209,8 @@ void ParticleSystem::createGravityForce() {
 		gravityForce->setName("Gravity");
 
 		forceGenerators.push_back(gravityForce);
-		particleForceRegistry->addForce(gravityForce);
+		particleForceRegistry->addForce(gravityForce); 
+		particleForceRegistry->addForceToAllParticles(gravityForce);
 	}
 }
 

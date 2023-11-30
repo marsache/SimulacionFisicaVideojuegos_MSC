@@ -32,4 +32,5 @@ public:
 	void generateParticles(ForceGenerator* f);
 	void generateStaticParticles(ForceGenerator* f);
 	void generateExplosionParticles(ForceGenerator* f);
+	void addForceToAllParticles(ForceGenerator* f);
 };
