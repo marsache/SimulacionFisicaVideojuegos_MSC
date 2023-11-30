@@ -205,9 +205,11 @@ void ParticleForceRegistry::generateExplosionParticles(ForceGenerator* f) {
 }
 
 void ParticleForceRegistry::addForceToAllParticles(ForceGenerator* f) {
+	auto itForce = fuerzas.find(f);
 	auto itParticles = particulas.begin();
 	while (itParticles != particulas.end()) {
 		(*itParticles).second.insert(f);
+		(*itForce).second.insert((*itParticles).first);
 		++itParticles;
 	}
 }

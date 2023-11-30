@@ -234,6 +234,7 @@ void ParticleSystem::createWindForce() {
 
 		forceGenerators.push_back(windForce);
 		particleForceRegistry->addForce(windForce);
+		particleForceRegistry->addForceToAllParticles(windForce);
 	}
 }
 
@@ -257,6 +258,7 @@ void ParticleSystem::createWhirlwindForce() {
 
 		forceGenerators.push_back(whirlwindForce);
 		particleForceRegistry->addForce(whirlwindForce);
+		particleForceRegistry->addForceToAllParticles(whirlwindForce);
 	}
 }
 
