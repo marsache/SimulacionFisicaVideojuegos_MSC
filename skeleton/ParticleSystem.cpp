@@ -312,12 +312,12 @@ void ParticleSystem::generateSpringForce() {
 }
 
 void ParticleSystem::generateDoubleSpringForce() {
-	Particle* p1 = new Particle(Vector3(-10, 10, 0), Vector3(0, 0, 0), 10, 5, &PxSphereGeometry(10), 1, 500);
-	Particle* p2 = new Particle(Vector3(10, 10, 0), Vector3(0, 0, 0), 10, 5, &PxSphereGeometry(10), 1, 500);
+	Particle* p1 = new Particle(Vector3(-30, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+	Particle* p2 = new Particle(Vector3(30, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
 
-	SpringForceGenerator* f1 = new SpringForceGenerator(1, 10, p2);
+	SpringForceGenerator* f1 = new SpringForceGenerator(10, 30, p2);
 	f1->setName("Spring1");
-	SpringForceGenerator* f2 = new SpringForceGenerator(1, 10, p1);
+	SpringForceGenerator* f2 = new SpringForceGenerator(10, 30, p1);
 	f2->setName("Spring2");
 
 	forceGenerators.push_back(f1);
