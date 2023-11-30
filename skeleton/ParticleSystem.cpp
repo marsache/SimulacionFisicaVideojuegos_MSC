@@ -26,7 +26,7 @@ void ParticleSystem::update(double t) {
 
 	// se actualizan todas las partículas
 	for (auto itParticles : particles) 
-		itParticles->integratev2(t);
+		itParticles->integratev3(t);
 		//itParticles->integratev2(t);
 
 	// se actualizan todos los fireworks
@@ -35,14 +35,14 @@ void ParticleSystem::update(double t) {
 
 	// se añaden partículas afectadas por fuerzas
 	// se recorre la lista de fuerzas para ir creando partículas para cada fuerza
-	for (auto itForce : forceGenerators) {
+	/*for (auto itForce : forceGenerators) {
 		if (itForce->getName() == "Whirlwind")
 			particleForceRegistry->generateStaticParticles(itForce);
 		else if (itForce->getName() == "Explosion")
 			particleForceRegistry->generateExplosionParticles(itForce);
 		else
 			particleForceRegistry->generateParticles(itForce);
-	}
+	}*/
 
 	// se actualizan todas las partículas afectadas por fuerzas
 	particleForceRegistry->updateForces(t);
@@ -280,4 +280,38 @@ void ParticleSystem::createExplosionForce() {
 		forceGenerators.push_back(explosionForce);
 		particleForceRegistry->addForce(explosionForce);
 	}
+}
+
+void ParticleSystem::generateSpringForce() {
+	Particle* p1 = new Particle(Vector3(-10, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+	Particle* p2 = new Particle(Vector3(20, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+
+	SpringForceGenerator* f1 = new SpringForceGenerator(10, 20, p2);
+	f1->setName("Spring1");
+
+	forceGenerators.push_back(f1);
+
+	particleForceRegistry->addRegistry(f1, p1);
+
+	particlesWForces.insert(p1);
+	particles.push_back(p2);
+}
+
+void ParticleSystem::generateDoubleSpringForce() {
+	Particle* p1 = new Particle(Vector3(-10, 10, 0), Vector3(0, 0, 0), 10, 5, &PxSphereGeometry(10), 1, 500);
+	Particle* p2 = new Particle(Vector3(10, 10, 0), Vector3(0, 0, 0), 10, 5, &PxSphereGeometry(10), 1, 500);
+
+	SpringForceGenerator* f1 = new SpringForceGenerator(1, 10, p2);
+	f1->setName("Spring1");
+	SpringForceGenerator* f2 = new SpringForceGenerator(1, 10, p1);
+	f2->setName("Spring2");
+
+	forceGenerators.push_back(f1);
+	forceGenerators.push_back(f2);
+
+	particleForceRegistry->addRegistry(f1, p1);
+	particleForceRegistry->addRegistry(f2, p2);
+
+	particlesWForces.insert(p1);
+	particlesWForces.insert(p2);
 }

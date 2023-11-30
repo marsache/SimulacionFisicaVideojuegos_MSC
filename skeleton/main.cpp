@@ -158,6 +158,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'U':
 		particleSys->createExplosionForce();
 		break;
+	case 'O':
+		particleSys->generateSpringForce();
+		break;
 	case ' ':
 	{
 		break;

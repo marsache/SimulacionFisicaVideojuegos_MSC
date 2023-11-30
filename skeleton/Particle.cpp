@@ -44,8 +44,12 @@ void Particle::integratev3(double t) {
 	_pose.p += vel * t;
 
 	// vida
-	if (timeAlive < particleLife)
-		timeAlive += 0.1;
-	else
-		alive = false;
+	if (particleLife != -1) {
+		if (timeAlive < particleLife)
+			timeAlive += 0.1;
+		else
+			alive = false;
+	}
+
+	forces = Vector3(0, 0, 0);
 }

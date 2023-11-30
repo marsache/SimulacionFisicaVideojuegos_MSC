@@ -17,6 +17,8 @@
 #include "WhirlwindForce.h"
 #include "ExplosionForce.h"
 
+#include "SpringForceGenerator.h"
+
 using namespace std;
 
 //const int PARTICLE_RADIUS = 2;
@@ -55,4 +57,7 @@ public:
 	void createWindForce();
 	void createWhirlwindForce();
 	void createExplosionForce();
+
+	void generateSpringForce();
+	void generateDoubleSpringForce();
 };
