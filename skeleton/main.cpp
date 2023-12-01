@@ -173,6 +173,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'L':
 		particleSys->generateBuoyancyForce();
 		break;
+	case 'Y':
+		particleSys->generateSlinkyForce();
+		break;
 	case ' ':
 	{
 		break;

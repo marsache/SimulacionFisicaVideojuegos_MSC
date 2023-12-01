@@ -380,6 +380,78 @@ void ParticleSystem::generateBuoyancyForce() {
 	}
 }
 
+void ParticleSystem::generateSlinkyForce() {
+	Particle* p1 = new Particle(Vector3(0, 10, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+	Particle* p2 = new Particle(Vector3(0, 30, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+	Particle* p3 = new Particle(Vector3(0, 60, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+	Particle* p4 = new Particle(Vector3(0, 80, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+	Particle* p5 = new Particle(Vector3(0, 100, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+	Particle* p6 = new Particle(Vector3(0, 120, 0), Vector3(0, 0, 0), 10, 1, &PxSphereGeometry(10), 1, -1);
+
+	SpringForceGenerator* f12 = new SpringForceGenerator(3, 20, p2);
+	f12->setName("Slinky");
+	SpringForceGenerator* f23 = new SpringForceGenerator(3, 20, p3);
+	f23->setName("Slinky");
+	SpringForceGenerator* f34 = new SpringForceGenerator(3, 20, p4);
+	f34->setName("Slinky");
+	SpringForceGenerator* f45 = new SpringForceGenerator(3, 20, p5);
+	f45->setName("Slinky");
+	SpringForceGenerator* f56 = new SpringForceGenerator(3, 20, p6);
+	f56->setName("Slinky");
+
+	SpringForceGenerator* f21 = new SpringForceGenerator(3, 20, p1);
+	f21->setName("Slinky");
+	SpringForceGenerator* f32 = new SpringForceGenerator(3, 20, p2);
+	f32->setName("Slinky");
+	SpringForceGenerator* f43 = new SpringForceGenerator(3, 20, p3);
+	f43->setName("Slinky");
+	SpringForceGenerator* f54 = new SpringForceGenerator(3, 20, p4);
+	f54->setName("Slinky");
+	SpringForceGenerator* f65 = new SpringForceGenerator(3, 20, p5);
+	f65->setName("Slinky");
+
+	forceGenerators.push_back(f12);
+	forceGenerators.push_back(f23);
+	forceGenerators.push_back(f34);
+	forceGenerators.push_back(f45);
+	forceGenerators.push_back(f56);
+	forceGenerators.push_back(f21);
+	forceGenerators.push_back(f32);
+	forceGenerators.push_back(f43);
+	forceGenerators.push_back(f54);
+	forceGenerators.push_back(f65);
+
+	particleForceRegistry->addRegistry(f12, p1);
+
+	particleForceRegistry->addRegistry(f23, p2);
+	particleForceRegistry->addRegistry(f21, p2);
+
+	particleForceRegistry->addRegistry(f32, p3);
+	particleForceRegistry->addRegistry(f34, p3);
+
+	particleForceRegistry->addRegistry(f45, p4);
+	particleForceRegistry->addRegistry(f43, p4);
+
+	particleForceRegistry->addRegistry(f56, p5);
+	particleForceRegistry->addRegistry(f54, p5);
+
+	particleForceRegistry->addRegistry(f65, p6);
+
+	particlesWForces.insert(p1);
+	particlesWForces.insert(p2);
+	particlesWForces.insert(p3);
+	particlesWForces.insert(p4);
+	particlesWForces.insert(p5);
+	particlesWForces.insert(p6);
+
+	p1->setColor(Vector4(255, 0, 255, 1));
+	p2->setColor(Vector4(0, 0, 0, 1));
+	p3->setColor(Vector4(255, 0, 255, 1));
+	p4->setColor(Vector4(0, 0, 0, 1));
+	p5->setColor(Vector4(255, 0, 255, 1));
+	p6->setColor(Vector4(0, 0, 0, 1));
+}
+
 void ParticleSystem::increaseKSpring() {
 	auto itFuerza = forceGenerators.begin();
 	bool encontrado = false;
@@ -395,7 +467,7 @@ void ParticleSystem::increaseKSpring() {
 
 void ParticleSystem::decreaseKSpring() {
 	auto itFuerza = forceGenerators.begin();
-	bool encontrado = false;
+	/*bool encontrado = false;
 	while (!encontrado && itFuerza != forceGenerators.end()) {
 		if ((*itFuerza)->getName() == "Spring1") {
 			(*itFuerza)->setK((*itFuerza)->getK() - 1);
@@ -403,5 +475,11 @@ void ParticleSystem::decreaseKSpring() {
 		}
 		else
 			++itFuerza;
+	}*/
+
+	while (itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Spring1" || (*itFuerza)->getName() == "Slinky" || (*itFuerza)->getName() == "Spring2")
+			(*itFuerza)->setK((*itFuerza)->getK() - 1);
+		++itFuerza;
 	}
 }

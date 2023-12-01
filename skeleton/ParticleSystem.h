@@ -62,6 +62,7 @@ public:
 	void generateSpringForce();
 	void generateDoubleSpringForce();
 	void generateBuoyancyForce();
+	void generateSlinkyForce();
 	void increaseKSpring();
 	void decreaseKSpring();
 };
