@@ -14,6 +14,7 @@ protected:
 public:
 	ForceGenerator();
 	virtual void updateForce(Particle* p, double t) {};
+	virtual void updateForce(PxRigidDynamic* p, double t) {};
 	//virtual unordered_set<Particle*> generateParticles() = 0;
 
 	void setName(string _name) { name = _name; }

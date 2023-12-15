@@ -58,15 +58,15 @@ void ParticleForceRegistry::deleteForceRegistry(ForceGenerator* f) {
 	// sólo se procesa la fuerza si esta existe
 	if (itMapFuerzas != fuerzas.end()) {
 		// se recorre la lista de partículas a las que afecta la fuerza
-		auto itListaPartículas = itMapFuerzas->second.begin();
-		while (itListaPartículas != itMapFuerzas->second.end()) { // coste lineal en función del número de fuerzas que afectan a la partícula
+		auto itListaParticulas = itMapFuerzas->second.begin();
+		while (itListaParticulas != itMapFuerzas->second.end()) { // coste lineal en función del número de fuerzas que afectan a la partícula
 			// se modifica el map de partículas
-			auto itMapParticulas = particulas.find(*itListaPartículas); // coste constante
+			auto itMapParticulas = particulas.find(*itListaParticulas); // coste constante
 			// se busca la fuerza a la que afecta a la partícula
 			auto itListaFuerzas = itMapParticulas->second.find(f); // coste constante
 			if (itListaFuerzas != itMapParticulas->second.end())
 				itMapParticulas->second.erase(itListaFuerzas);
-			itListaPartículas++;
+			itListaParticulas++;
 		}
 
 		// se elimina completamente la fuerza del map de fuerza

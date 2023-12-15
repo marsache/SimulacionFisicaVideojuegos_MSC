@@ -2,6 +2,7 @@
 
 ParticleSystem::ParticleSystem() {
 	particleForceRegistry = new ParticleForceRegistry();
+	rbForceRegistry = new RBForceRegistry();
 }
 
 ParticleSystem::~ParticleSystem() {}
@@ -17,44 +18,64 @@ void ParticleSystem::update(double t) {
 	particles.push_back(new Particle(Vector3(posX, posY, posZ), PARTICLE_DIR,
 		PARTICLE_RADIUS, 0.5, &PxSphereGeometry(PARTICLE_RADIUS)));*/
 
-	// se actualizan todos los generadores
-	// las partículas se añaden a la lista de partículas del sistema
-	for (auto itGenerators : particleGenerators) {
-		for (auto itParticle : itGenerators->generateParticles())
-			particles.push_back(itParticle);
-	}
+	//if (isForParticles) {
+		// se actualizan todos los generadores
+		// las partículas se añaden a la lista de partículas del sistema
+		for (auto itGenerators : particleGenerators) {     
+			for (auto itParticle : itGenerators->generateParticles())
+				particles.push_back(itParticle);
+		}
 
-	// se actualizan todas las partículas
-	for (auto itParticles : particles) 
-		itParticles->integratev3(t);
+		// se actualizan todas las partículas
+		for (auto itParticles : particles)
+			itParticles->integratev3(t);
 		//itParticles->integratev2(t);
 
 	// se actualizan todos los fireworks
-	for (auto itFireworks : fireworks) 
-		itFireworks->integratev2(t);
+		for (auto itFireworks : fireworks)
+			itFireworks->integratev2(t);
 
-	// se añaden partículas afectadas por fuerzas
-	// se recorre la lista de fuerzas para ir creando partículas para cada fuerza
-	/*for (auto itForce : forceGenerators) {
-		if (itForce->getName() == "Whirlwind")
-			particleForceRegistry->generateStaticParticles(itForce);
-		else if (itForce->getName() == "Explosion")
-			particleForceRegistry->generateExplosionParticles(itForce);
-		else
-			particleForceRegistry->generateParticles(itForce);
-	}*/
+		// se añaden partículas afectadas por fuerzas
+		// se recorre la lista de fuerzas para ir creando partículas para cada fuerza
+		/*for (auto itForce : forceGenerators) {
+			if (itForce->getName() == "Whirlwind")
+				particleForceRegistry->generateStaticParticles(itForce);
+			else if (itForce->getName() == "Explosion")
+				particleForceRegistry->generateExplosionParticles(itForce);
+			else
+				particleForceRegistry->generateParticles(itForce);
+		}*/
 
-	// se actualizan todas las partículas afectadas por fuerzas
-	particleForceRegistry->updateForces(t);
-	particleForceRegistry->updateParticles(t);
+		// se actualizan todas las partículas afectadas por fuerzas
+		particleForceRegistry->updateForces(t);
+		particleForceRegistry->updateParticles(t);
 
-	particleForceRegistry->deleteDeadParticles();
+		particleForceRegistry->deleteDeadParticles();
 
-	// se eliminan las partículas muertas
-	deleteParticles(); 
+		// se eliminan las partículas muertas
+		deleteParticles();
 
-	// genera más fuegos artificiales
-	explode();
+		// genera más fuegos artificiales
+		explode();
+	//}
+	//else {
+		//if (dynamicRigids.size() < RB_LIMIT) {
+			/*for (auto itRB : rbForceRegistry->generateDynamicRigids())
+				dynamicRigids.push_back(itRB);*/
+		//}
+		if (dynamicRigids.size() < RB_LIMIT) {
+		for (auto itRB : rbForceRegistry->generateGroundDynamicRigids())
+			dynamicRigids.push_back(itRB);
+		}
+		
+		for (auto itRBForce : forceGenerators) {
+			if (itRBForce->getName() != "Gravity")
+			rbForceRegistry->addForceToAllRBs(itRBForce);
+		}
+
+		rbForceRegistry->updateForces(t);
+		
+	//}
 }
 
 void ParticleSystem::explode() {
@@ -214,12 +235,37 @@ void ParticleSystem::createGravityForce() {
 	}
 }
 
+//void ParticleSystem::createWindForce() {
+//	auto itFuerza = forceGenerators.begin();
+//	bool encontrado = false;
+//	while (!encontrado && itFuerza != forceGenerators.end()) {
+//		if ((*itFuerza)->getName() == "Wind") {
+//			particleForceRegistry->deleteForceRegistry(*itFuerza);
+//			delete(*itFuerza);
+//			forceGenerators.erase(itFuerza);
+//			encontrado = true;
+//		}
+//		else
+//			++itFuerza;
+//	}
+//
+//	if (!encontrado) {
+//		WindForce* windForce = new WindForce(1000);
+//		windForce->setName("Wind");
+//
+//		forceGenerators.push_back(windForce);
+//		particleForceRegistry->addForce(windForce);
+//		particleForceRegistry->addForceToAllParticles(windForce);
+//	}
+//}
+
 void ParticleSystem::createWindForce() {
 	auto itFuerza = forceGenerators.begin();
 	bool encontrado = false;
 	while (!encontrado && itFuerza != forceGenerators.end()) {
 		if ((*itFuerza)->getName() == "Wind") {
 			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			rbForceRegistry->deleteForceRegistry(*itFuerza);
 			delete(*itFuerza);
 			forceGenerators.erase(itFuerza);
 			encontrado = true;
@@ -229,14 +275,41 @@ void ParticleSystem::createWindForce() {
 	}
 
 	if (!encontrado) {
-		WindForce* windForce = new WindForce(1000);
+		WindForce* windForce = new WindForce(100000);
 		windForce->setName("Wind");
 
 		forceGenerators.push_back(windForce);
 		particleForceRegistry->addForce(windForce);
 		particleForceRegistry->addForceToAllParticles(windForce);
+
+		rbForceRegistry->addForce(windForce);
+		rbForceRegistry->addForceToAllRBs(windForce);
 	}
 }
+
+//void ParticleSystem::createWhirlwindForce() {
+//	auto itFuerza = forceGenerators.begin();
+//	bool encontrado = false;
+//	while (!encontrado && itFuerza != forceGenerators.end()) {
+//		if ((*itFuerza)->getName() == "Whirlwind") {
+//			particleForceRegistry->deleteForceRegistry(*itFuerza);
+//			delete(*itFuerza);
+//			forceGenerators.erase(itFuerza);
+//			encontrado = true;
+//		}
+//		else
+//			++itFuerza;
+//	}
+//
+//	if (!encontrado) {
+//		WhirlwindForce* whirlwindForce = new WhirlwindForce(1);
+//		whirlwindForce->setName("Whirlwind");
+//
+//		forceGenerators.push_back(whirlwindForce);
+//		particleForceRegistry->addForce(whirlwindForce);
+//		particleForceRegistry->addForceToAllParticles(whirlwindForce);
+//	}
+//}
 
 void ParticleSystem::createWhirlwindForce() {
 	auto itFuerza = forceGenerators.begin();
@@ -244,6 +317,7 @@ void ParticleSystem::createWhirlwindForce() {
 	while (!encontrado && itFuerza != forceGenerators.end()) {
 		if ((*itFuerza)->getName() == "Whirlwind") {
 			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			rbForceRegistry->deleteForceRegistry(*itFuerza);
 			delete(*itFuerza);
 			forceGenerators.erase(itFuerza);
 			encontrado = true;
@@ -259,8 +333,34 @@ void ParticleSystem::createWhirlwindForce() {
 		forceGenerators.push_back(whirlwindForce);
 		particleForceRegistry->addForce(whirlwindForce);
 		particleForceRegistry->addForceToAllParticles(whirlwindForce);
+
+		rbForceRegistry->addForce(whirlwindForce);
+		rbForceRegistry->addForceToAllRBs(whirlwindForce);
 	}
 }
+
+//void ParticleSystem::createExplosionForce() {
+//	auto itFuerza = forceGenerators.begin();
+//	bool encontrado = false;
+//	while (!encontrado && itFuerza != forceGenerators.end()) {
+//		if ((*itFuerza)->getName() == "Explosion") {
+//			particleForceRegistry->deleteForceRegistry(*itFuerza);
+//			delete(*itFuerza);
+//			forceGenerators.erase(itFuerza);
+//			encontrado = true;
+//		}
+//		else
+//			++itFuerza;
+//	}
+//
+//	if (!encontrado) {
+//		ExplosionForce* explosionForce = new ExplosionForce();
+//		explosionForce->setName("Explosion");
+//
+//		forceGenerators.push_back(explosionForce);
+//		particleForceRegistry->addForce(explosionForce);
+//	}
+//}
 
 void ParticleSystem::createExplosionForce() {
 	auto itFuerza = forceGenerators.begin();
@@ -268,6 +368,7 @@ void ParticleSystem::createExplosionForce() {
 	while (!encontrado && itFuerza != forceGenerators.end()) {
 		if ((*itFuerza)->getName() == "Explosion") {
 			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			rbForceRegistry->deleteForceRegistry(*itFuerza);
 			delete(*itFuerza);
 			forceGenerators.erase(itFuerza);
 			encontrado = true;
@@ -282,6 +383,9 @@ void ParticleSystem::createExplosionForce() {
 
 		forceGenerators.push_back(explosionForce);
 		particleForceRegistry->addForce(explosionForce);
+
+		rbForceRegistry->addForce(explosionForce);
+		rbForceRegistry->addForceToAllRBs(explosionForce);
 	}
 }
 

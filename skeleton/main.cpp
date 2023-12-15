@@ -80,7 +80,18 @@ void initPhysics(bool interactive)
 	posGround.p -= PxVec3(0, 50, 50);
 	ground = new Ground(posGround, Vector4(130, 94, 92, 1), PxVec3(1, 150, 150));*/
 
+	// generar suelo
+	PxRigidStatic* suelo = gPhysics->createRigidStatic(PxTransform({0, 0, 0}));
+	PxShape* shape = CreateShape(PxBoxGeometry(1000, 0.1, 1000));
+	suelo->attachShape(*shape);
+	gScene->addActor(*suelo);
+
+	// pintar suelo
+	RenderItem* item;
+	item = new RenderItem(shape, suelo, {0.8, 0.8, 0.8, 1});
+
 	particleSys = new ParticleSystem();
+
 	}
 
 
@@ -100,7 +111,7 @@ void stepPhysics(bool interactive, double t)
 	//particula->integratev2(t);
 	projectileMngr->integrate(t);
 
-	particleSys->update(t);
+	particleSys->update(t); 
 }
 
 // Function to clean data

@@ -19,4 +19,5 @@ protected:
 public:
 	WhirlwindForce(int _acceleration) : ForceGenerator(), acceleration(0, _acceleration, 0), influencedArea(25, -10, 25) {}
 	virtual void updateForce(Particle* p, double t);
+	virtual void updateForce(PxRigidDynamic* rb, double t);
 };

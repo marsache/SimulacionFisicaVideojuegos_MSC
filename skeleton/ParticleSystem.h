@@ -20,6 +20,8 @@
 #include "SpringForceGenerator.h"
 #include "BuoyancyForceGenerator.h"
 
+#include "RBForceRegistry.h"
+
 using namespace std;
 
 //const int PARTICLE_RADIUS = 2;
@@ -30,6 +32,9 @@ using namespace std;
 class ParticleSystem
 {
 private:
+	const int RB_LIMIT = 1;
+
+	// partículas
 	list<Particle*> particles;
 	list<Firework*> fireworks;
 	list<ParticleGenerator*> particleGenerators;
@@ -37,6 +42,15 @@ private:
 	ParticleForceRegistry* particleForceRegistry;
 	list<ForceGenerator*> forceGenerators;
 	unordered_set<Particle*> particlesWForces;
+
+	// sólidos rígidos 
+	list<PxRigidStatic*> staticRigids;
+	list<PxRigidDynamic*> dynamicRigids;
+	RBForceRegistry* rbForceRegistry;
+	//list<ForceGenerator*> rbforceGenerators;
+	/*list<ParticleGenerator*> particleGenerators;
+
+	unordered_set<Particle*> particlesWForces;*/
 
 public:
 	ParticleSystem();
