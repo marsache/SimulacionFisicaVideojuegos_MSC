@@ -191,6 +191,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'Y':
 		particleSys->generateSlinkyForce();
 		break;
+	case 'R':
+		particleSys->generateStaticRigid();
+		break;
 	case ' ':
 	{
 		break;

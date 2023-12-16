@@ -676,3 +676,21 @@ void ParticleSystem::decreaseKSpring() {
 		++itFuerza;
 	}
 }
+
+void ParticleSystem::generateStaticRigid() {
+	ParticleTypes particleType;
+	Vector3 position;
+
+	position.x = rand() % int(particleType.staticRB.positionMax.x) + int(particleType.staticRB.positionMin.x);
+	position.y = 0;
+	position.z = rand() % int(particleType.staticRB.positionMax.z) + int(particleType.staticRB.positionMin.z);
+
+	// cálculo de la posición
+	PxRigidStatic* rigidBStatic = gPhysics->createRigidStatic(PxTransform(position));
+	PxShape* shape_box = CreateShape(PxBoxGeometry(5, 5, 5));
+	rigidBStatic->attachShape(*shape_box);
+	gScene->addActor(*rigidBStatic);
+
+	RenderItem* dynamicItem;
+	dynamicItem = new RenderItem(shape_box, rigidBStatic, { 0.8, 0.8, 0.8, 1 });
+}

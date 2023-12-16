@@ -22,7 +22,10 @@
 
 #include "RBForceRegistry.h"
 
+#include "ParticleInfo.h"
+
 using namespace std;
+using namespace ParticleInfo;
 
 //const int PARTICLE_RADIUS = 2;
 //const int PARTICLE_POS_INI = 0;
@@ -81,4 +84,6 @@ public:
 	void generateSlinkyForce();
 	void increaseKSpring();
 	void decreaseKSpring();
+
+	void generateStaticRigid();
 };
