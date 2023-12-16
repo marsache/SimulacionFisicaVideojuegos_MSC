@@ -19,4 +19,5 @@ public:
 
 protected:
 	virtual list<Particle*> generateParticles();
+	virtual list<PxRigidDynamic*> generateRBsDynamic();
 };

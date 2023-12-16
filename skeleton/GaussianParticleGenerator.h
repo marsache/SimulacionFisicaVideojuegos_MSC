@@ -18,6 +18,7 @@ public:
 
 protected:
 	virtual list<Particle*> generateParticles();
+	virtual list<PxRigidDynamic*> generateRBsDynamic();
 
 	Vector3 devPos, devVel;
 	double devT;

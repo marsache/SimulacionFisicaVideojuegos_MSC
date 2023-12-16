@@ -143,19 +143,23 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		projectileMngr->createProjectile();
 		break; 
 	case 'N':
-		particleSys->createUniformParticleGenerator();
+		//particleSys->createUniformParticleGenerator(); // partículas
+		particleSys->createUniformRBGenerator(); // sólidos rígidos
 		break;
 	case 'P':
-		particleSys->createGaussianParticleGenerator();
+		//particleSys->createGaussianParticleGenerator(); // partículas
+		particleSys->createGaussianRBGenerator(); // sólidos rígidos
 		break;
 	case 'F':
-		particleSys->createFountainParticleGenerator();
+		//particleSys->createFountainParticleGenerator(); // partículas
+		particleSys->createFountainRBGenerator(); // sólidos rígidos
 		break;
 	case 'G':
 		particleSys->createFireworkGenerator();
 		break;
 	case 'J':
-		particleSys->createJetParticleGenerator();
+		//particleSys->createJetParticleGenerator(); // partículas
+		particleSys->createJetRBGenerator(); // sólidos rígidos
 		break;
 	case 'M':
 		particleSys->createGravityForce();
@@ -179,7 +183,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		particleSys->decreaseKSpring();
 		break;
 	case 'E':
-		particleSys->decreaseKSpring();
+		particleSys->increaseKSpring();
 		break;
 	case 'L':
 		particleSys->generateBuoyancyForce();

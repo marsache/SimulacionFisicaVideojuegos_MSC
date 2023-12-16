@@ -46,6 +46,11 @@ void ParticleSystem::update(double t) {
 				particleForceRegistry->generateParticles(itForce);
 		}*/
 
+		for (auto itGenerators : rbGenerators) {
+			for (auto itRB : itGenerators->generateRBsDynamic())
+				dynamicRigids.push_back(itRB);
+		}
+
 		// se actualizan todas las partículas afectadas por fuerzas
 		particleForceRegistry->updateForces(t);
 		particleForceRegistry->updateParticles(t);
@@ -143,6 +148,27 @@ void ParticleSystem::createUniformParticleGenerator() {
 	}
 }
 
+void ParticleSystem::createUniformRBGenerator() {
+	auto it = rbGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && it != rbGenerators.end()) {
+		if ((*it)->getName() == "Uniform") {
+			delete(*it);
+			rbGenerators.erase(it);
+			encontrado = true;
+		}
+		else
+			++it;
+	}
+
+	if (!encontrado) {
+		UniformParticleGenerator* uniformPG = new UniformParticleGenerator();
+		uniformPG->setName("Uniform");
+
+		rbGenerators.push_back(uniformPG);
+	}
+}
+
 void ParticleSystem::createGaussianParticleGenerator() {
 	auto it = particleGenerators.begin();
 	bool encontrado = false;
@@ -164,6 +190,27 @@ void ParticleSystem::createGaussianParticleGenerator() {
 	}
 }
 
+void ParticleSystem::createGaussianRBGenerator() {
+	auto it = rbGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && it != rbGenerators.end()) {
+		if ((*it)->getName() == "Gaussian") {
+			delete(*it);
+			rbGenerators.erase(it);
+			encontrado = true;
+		}
+		else
+			++it;
+	}
+
+	if (!encontrado) {
+		GaussianParticleGenerator* gaussianPG = new GaussianParticleGenerator();
+		gaussianPG->setName("Gaussian");
+
+		rbGenerators.push_back(gaussianPG);
+	}
+}
+
 void ParticleSystem::createFountainParticleGenerator() {
 	auto it = particleGenerators.begin();
 	bool encontrado = false;
@@ -182,6 +229,27 @@ void ParticleSystem::createFountainParticleGenerator() {
 		fountainPG->setName("Fountain");
 
 		particleGenerators.push_back(fountainPG);
+	}
+}
+
+void ParticleSystem::createFountainRBGenerator() {
+	auto it = rbGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && it != rbGenerators.end()) {
+		if ((*it)->getName() == "Fountain") {
+			delete(*it);
+			rbGenerators.erase(it);
+			encontrado = true;
+		}
+		else
+			++it;
+	}
+
+	if (!encontrado) {
+		FountainParticleGenerator* fountainPG = new FountainParticleGenerator();
+		fountainPG->setName("Fountain");
+
+		rbGenerators.push_back(fountainPG);
 	}
 }
 
@@ -208,6 +276,27 @@ void ParticleSystem::createJetParticleGenerator() {
 		jetPG->setName("Jet");
 
 		particleGenerators.push_back(jetPG);
+	}
+}
+
+void ParticleSystem::createJetRBGenerator() {
+	auto it = rbGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && it != rbGenerators.end()) {
+		if ((*it)->getName() == "Jet") {
+			delete(*it);
+			rbGenerators.erase(it);
+			encontrado = true;
+		}
+		else
+			++it;
+	}
+
+	if (!encontrado) {
+		JetParticleGenerator* jetPG = new JetParticleGenerator();
+		jetPG->setName("Jet");
+
+		rbGenerators.push_back(jetPG);
 	}
 }
 

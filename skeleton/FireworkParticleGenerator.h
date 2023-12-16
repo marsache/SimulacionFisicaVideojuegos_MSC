@@ -20,4 +20,5 @@ public:
 
 private:
 	virtual list<Particle*> generateParticles();
+	virtual list<PxRigidDynamic*> generateRBsDynamic() { list<PxRigidDynamic*> l; return l; }
 };

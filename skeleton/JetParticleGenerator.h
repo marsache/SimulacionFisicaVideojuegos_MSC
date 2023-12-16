@@ -4,7 +4,6 @@
 #include "Particle.h"
 #include <list>
 
-using namespace std;
 using namespace ParticleInfo;
 extern PxPhysics* gPhysics;
 
@@ -18,5 +17,5 @@ public:
 
 private:
 	virtual list<Particle*> generateParticles();
-	//list<PxRigidDynamic*> generateRBsDynamic();
+	virtual list<PxRigidDynamic*> generateRBsDynamic();
 };

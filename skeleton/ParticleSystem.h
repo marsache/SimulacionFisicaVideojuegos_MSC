@@ -47,10 +47,7 @@ private:
 	list<PxRigidStatic*> staticRigids;
 	list<PxRigidDynamic*> dynamicRigids;
 	RBForceRegistry* rbForceRegistry;
-	//list<ForceGenerator*> rbforceGenerators;
-	/*list<ParticleGenerator*> particleGenerators;
-
-	unordered_set<Particle*> particlesWForces;*/
+	list<ParticleGenerator*> rbGenerators;
 
 public:
 	ParticleSystem();
@@ -67,6 +64,11 @@ public:
 	void createFountainParticleGenerator();
 	void createFireworkGenerator();
 	void createJetParticleGenerator();
+
+	void createUniformRBGenerator();
+	void createGaussianRBGenerator();
+	void createFountainRBGenerator();
+	void createJetRBGenerator();
 
 	void createGravityForce();
 	void createWindForce();
