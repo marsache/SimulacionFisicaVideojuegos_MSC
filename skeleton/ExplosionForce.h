@@ -9,7 +9,7 @@ const int EXPLOSION_TIME = 1;
 const int EXPLOSION_RADIUS = 200;
 const float SOUND_AIR_SPEED = 331;
 const int K_EXPLOSION_PARTICLE = 1000;
-const int K_EXPLOSION = 100000;
+const int K_EXPLOSION = 1000000;
 const int TAU_PARTICLE = 500;
 const int TAU = 5;
 

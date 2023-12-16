@@ -1,0 +1,39 @@
+Para probar los generadores de sólidos rígidos y de fuerzas:
+A la hora de probar el efecto de las fuerzas en los sólidos
+rígidos, se recomienda usar el generador de sólidos "Jet".
+Activar primero un generador de sólidos rígidos y después
+otro de fuerza; se activan y desactivan con la misma tecla.
+
+Se recomienda, además, alejar la vista con la tecla S para
+ver mejor los simuladores.
+
+Generadores de sólidos rígidos dinámicos:
+- Generador uniforme de sólidos rígidos (nieve): tecla N
+- Generador gaussiano de sólidos rígidos (polvo): tecla P
+- Generador de fuente de sólidos rígidos: tecla F
+- Generador de jet de sólidos rígidos: tecla J
+
+Generador de sólidos rígidos estáticos:
+Tecla R. Genera un sólido cada vez que se pulsa la tecla en
+un lugar aleatorio del suelo.
+
+Generadores de fuerzas:
+- Generador de viento: tecla V
+- Generador de remolino: tecla C
+- Generador de explosión: tecla U (para usar este generador, en 
+lugar de utilizar uno de los generadores de partículas anteriormente
+mencionados, presionar I para generar partículas sin velocidad;
+luego presionar U para la explosión).
+
+Cada sólido rígido se genera a partir del generador específico 
+deseado. Se añade a una lista de sólidos en ParticleSystem para 
+ser gestionado con más facilidad. Además, se añaden a RBForceRegistry, 
+donde se gestionan las actualizaciones de las fuerzas y su interacción 
+con los sólidos rígidos, se crean, se eliminan...
+
+He reciclado los generadores de partículas y de fuerzas y he
+añadido métodos para la gestión de sólidos rígidos dentro de los 
+generadores originales para tenerlo todo en el mismo sitio.
+
+
+Para cualquier duda, mi correo está siempre disponible. :)

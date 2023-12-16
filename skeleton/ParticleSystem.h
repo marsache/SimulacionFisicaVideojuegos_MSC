@@ -35,7 +35,7 @@ using namespace ParticleInfo;
 class ParticleSystem
 {
 private:
-	const int RB_LIMIT = 1000;
+	const int RB_LIMIT = 3;
 
 	// partículas
 	list<Particle*> particles;

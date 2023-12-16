@@ -231,10 +231,17 @@ list<PxRigidDynamic*> RBForceRegistry::generateGroundDynamicRigids() {
 	list<PxRigidDynamic*> lista;
 
 	for (int i = 0; i < NUM_RBS; ++i) {
+		Vector3 position;
+		position.x = rand() % 30;
+		position.y = rand() % 30;
+		position.z = rand() % 30;
+
 		// cálculo de la posición
 		//PxRigidDynamic* rigidBDynamic = gPhysics->createRigidDynamic(PxTransform({ 0, 100, 0 }));
 		//rigidBDynamic->setLinearVelocity({ 0, -20, 0 });
-		PxRigidDynamic* rigidBDynamic = gPhysics->createRigidDynamic(PxTransform({ 0, 10, 0 }));
+		//PxRigidDynamic* rigidBDynamic = gPhysics->createRigidDynamic(PxTransform({ 0, 10, 0 }));
+		//rigidBDynamic->setLinearVelocity({ 0, 1, 0 });
+		PxRigidDynamic* rigidBDynamic = gPhysics->createRigidDynamic(PxTransform(position));
 		rigidBDynamic->setLinearVelocity({ 0, 1, 0 });
 		rigidBDynamic->setAngularVelocity({ 0, 0, 0 });
 		PxShape* shape_box = CreateShape(PxBoxGeometry(5, 5, 5));
