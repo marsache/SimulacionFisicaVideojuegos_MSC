@@ -35,7 +35,7 @@ using namespace ParticleInfo;
 class ParticleSystem
 {
 private:
-	const int RB_LIMIT = 1;
+	const int RB_LIMIT = 1000;
 
 	// partículas
 	list<Particle*> particles;
@@ -51,6 +51,8 @@ private:
 	list<PxRigidDynamic*> dynamicRigids;
 	RBForceRegistry* rbForceRegistry;
 	list<ParticleGenerator*> rbGenerators;
+
+	bool automaticDynamicRigidGenerator;
 
 public:
 	ParticleSystem();
@@ -86,4 +88,7 @@ public:
 	void decreaseKSpring();
 
 	void generateStaticRigid();
+	void generateDynamicRigid();
+
+	void setAutomaticDynamicRigidGenerator(bool value) { automaticDynamicRigidGenerator = value; }
 };

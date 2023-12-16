@@ -21,7 +21,7 @@ protected:
 	RenderItem* renderInfluenceArea;
 
 public:
-	WindForce(int _acceleration) : acceleration(_acceleration, 0, 0), influencedArea(0, 0, 0) {
+	WindForce(int _acceleration) : acceleration(_acceleration, 0, 0), influencedArea(0, 250, 0) {
 		physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(RADIUS_INFLUENCED_AREA));
 		renderInfluenceArea = new RenderItem(shape, &influencedArea, COLOR);
 	}

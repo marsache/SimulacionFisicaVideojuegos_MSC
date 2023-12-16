@@ -21,5 +21,5 @@ void WhirlwindForce::updateForce(PxRigidDynamic* rb, double t) {
 		force.y = 50 - (rb->getGlobalPose().p.y - influencedArea.p.y);
 	force.z = rb->getGlobalPose().p.x - influencedArea.p.x;
 
-	rb->addForce(K_WHIRLWIND * force);
+	rb->addForce(50 * force);
 }

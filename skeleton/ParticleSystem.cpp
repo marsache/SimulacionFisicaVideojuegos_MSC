@@ -1,6 +1,6 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem() {
+ParticleSystem::ParticleSystem() : automaticDynamicRigidGenerator(false){
 	particleForceRegistry = new ParticleForceRegistry();
 	rbForceRegistry = new RBForceRegistry();
 }
@@ -47,8 +47,10 @@ void ParticleSystem::update(double t) {
 		}*/
 
 		for (auto itGenerators : rbGenerators) {
-			for (auto itRB : itGenerators->generateRBsDynamic())
+			for (auto itRB : itGenerators->generateRBsDynamic()) {
 				dynamicRigids.push_back(itRB);
+				rbForceRegistry->addRBToRegistry(itRB);
+			}
 		}
 
 		// se actualizan todas las partículas afectadas por fuerzas
@@ -68,9 +70,9 @@ void ParticleSystem::update(double t) {
 			/*for (auto itRB : rbForceRegistry->generateDynamicRigids())
 				dynamicRigids.push_back(itRB);*/
 		//}
-		if (dynamicRigids.size() < RB_LIMIT) {
-		for (auto itRB : rbForceRegistry->generateGroundDynamicRigids())
-			dynamicRigids.push_back(itRB);
+		if (dynamicRigids.size() < RB_LIMIT && automaticDynamicRigidGenerator) {
+			for (auto itRB : rbForceRegistry->generateGroundDynamicRigids())
+				dynamicRigids.push_back(itRB);
 		}
 		
 		for (auto itRBForce : forceGenerators) {
@@ -416,7 +418,7 @@ void ParticleSystem::createWhirlwindForce() {
 	}
 
 	if (!encontrado) {
-		WhirlwindForce* whirlwindForce = new WhirlwindForce(1);
+		WhirlwindForce* whirlwindForce = new WhirlwindForce(1000000);
 		whirlwindForce->setName("Whirlwind");
 
 		forceGenerators.push_back(whirlwindForce);
@@ -693,4 +695,11 @@ void ParticleSystem::generateStaticRigid() {
 
 	RenderItem* dynamicItem;
 	dynamicItem = new RenderItem(shape_box, rigidBStatic, { 0.8, 0.8, 0.8, 1 });
+}
+
+void ParticleSystem::generateDynamicRigid() {
+	if (dynamicRigids.size() < RB_LIMIT) {
+		for (auto itRB : rbForceRegistry->generateGroundDynamicRigids())
+			dynamicRigids.push_back(itRB);
+	}
 }

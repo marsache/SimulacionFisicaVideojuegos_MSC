@@ -32,19 +32,19 @@ list<PxRigidDynamic*> FountainParticleGenerator::generateRBsDynamic() {
 		ParticleTypes particleType;
 		Vector3 position, velocity;
 
-		position.x = rand() % int(particleType.fountainParticle.positionMin.x) + int(particleType.fountainParticle.positionMin.x);
-		position.y = rand() % int(particleType.fountainParticle.positionMax.y) + int(particleType.fountainParticle.positionMin.y);
-		position.z = rand() % int(particleType.fountainParticle.positionMax.z) + int(particleType.fountainParticle.positionMin.z);
+		position.x = rand() % int(particleType.fountainRB.positionMax.x) + int(particleType.fountainRB.positionMin.x);
+		position.y = rand() % int(particleType.fountainRB.positionMax.y) + int(particleType.fountainRB.positionMin.y);
+		position.z = rand() % int(particleType.fountainRB.positionMax.z) + int(particleType.fountainRB.positionMin.z);
 
 		// generaci�n de la velocidad
-		velocity.x = rand() % int(particleType.fountainParticle.velocityMin.x) + int(particleType.fountainParticle.velocityMax.x);
-		velocity.y = rand() % int(particleType.fountainParticle.velocityMin.y) + int(particleType.fountainParticle.velocityMax.y);
-		velocity.z = rand() % int(particleType.fountainParticle.velocityMin.z) + int(particleType.fountainParticle.velocityMax.z);
+		velocity.x = rand() % int(particleType.fountainRB.velocityMin.x) + int(particleType.fountainRB.velocityMax.x);
+		velocity.y = rand() % int(particleType.fountainRB.velocityMin.y) + int(particleType.fountainRB.velocityMax.y);
+		velocity.z = rand() % int(particleType.fountainRB.velocityMin.z) + int(particleType.fountainRB.velocityMax.z);
 
 		PxRigidDynamic* rigidBDynamic = gPhysics->createRigidDynamic(PxTransform(position));
-		rigidBDynamic->setLinearVelocity(velocity);
+		rigidBDynamic->setLinearVelocity({0, 100, 0});
 		rigidBDynamic->setAngularVelocity({ 0, 0, 0 });
-		PxShape* shape_box = CreateShape(PxBoxGeometry(particleType.fountainParticle.radius, particleType.fountainParticle.radius, particleType.fountainParticle.radius));
+		PxShape* shape_box = CreateShape(PxBoxGeometry(particleType.fountainRB.radius, particleType.fountainRB.radius, particleType.fountainRB.radius));
 		rigidBDynamic->attachShape(*shape_box);
 		PxRigidBodyExt::updateMassAndInertia(*rigidBDynamic, 0.15);
 		gScene->addActor(*rigidBDynamic);

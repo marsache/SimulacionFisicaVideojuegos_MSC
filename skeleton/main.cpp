@@ -194,6 +194,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'R':
 		particleSys->generateStaticRigid();
 		break;
+	case 'I':
+		particleSys->setAutomaticDynamicRigidGenerator(true);
+		break;
 	case ' ':
 	{
 		break;

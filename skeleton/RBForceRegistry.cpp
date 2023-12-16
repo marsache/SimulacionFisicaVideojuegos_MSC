@@ -232,8 +232,10 @@ list<PxRigidDynamic*> RBForceRegistry::generateGroundDynamicRigids() {
 
 	for (int i = 0; i < NUM_RBS; ++i) {
 		// cálculo de la posición
-		PxRigidDynamic* rigidBDynamic = gPhysics->createRigidDynamic(PxTransform({ 0, 100, 0 }));
-		rigidBDynamic->setLinearVelocity({ 0, -20, 0 });
+		//PxRigidDynamic* rigidBDynamic = gPhysics->createRigidDynamic(PxTransform({ 0, 100, 0 }));
+		//rigidBDynamic->setLinearVelocity({ 0, -20, 0 });
+		PxRigidDynamic* rigidBDynamic = gPhysics->createRigidDynamic(PxTransform({ 0, 10, 0 }));
+		rigidBDynamic->setLinearVelocity({ 0, 1, 0 });
 		rigidBDynamic->setAngularVelocity({ 0, 0, 0 });
 		PxShape* shape_box = CreateShape(PxBoxGeometry(5, 5, 5));
 		rigidBDynamic->attachShape(*shape_box);
@@ -250,4 +252,9 @@ list<PxRigidDynamic*> RBForceRegistry::generateGroundDynamicRigids() {
 	}
 
 	return lista;
+}
+
+void RBForceRegistry::addRBToRegistry(PxRigidDynamic* RB) {
+	ListaFuerzasPorRB listaAux;
+	RBs.insert({ RB, listaAux });
 }

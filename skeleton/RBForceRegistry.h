@@ -36,4 +36,5 @@ public:
 	void addForceToAllRBs(ForceGenerator* f);
 	list<PxRigidDynamic*> generateDynamicRigids();
 	list<PxRigidDynamic*> generateGroundDynamicRigids();
+	void addRBToRegistry(PxRigidDynamic* RB);
 };
