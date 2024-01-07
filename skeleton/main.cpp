@@ -10,6 +10,8 @@
 
 #include <iostream>
 
+#include "ParticleSystem.h"
+
 std::string display_text = "This is a test";
 
 
@@ -29,6 +31,8 @@ PxPvd*                  gPvd        = NULL;
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
+
+ParticleSystem* particleSys;
 
 
 // Initialize physics engine
@@ -54,6 +58,10 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+
+	// inicialización del sistema de partículas
+	particleSys = new ParticleSystem();
+
 	}
 
 
@@ -66,6 +74,8 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+
+	particleSys->update(t);
 }
 
 // Function to clean data
