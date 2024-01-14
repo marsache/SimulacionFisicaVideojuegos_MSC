@@ -15,8 +15,6 @@ extern PxScene* gScene;
 class ParticleSystem
 {
 private:
-	const int RB_LIMIT = 3;
-
 	// partículas
 	list<Particle*> particles;
 	//list<Firework*> fireworks;

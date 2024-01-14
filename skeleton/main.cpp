@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include "ParticleSystem.h"
+#include "RigidBodySystem.h"
 
 std::string display_text = "This is a test";
 
@@ -33,6 +34,7 @@ PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
 ParticleSystem* particleSys;
+RigidBodySystem* RBSystem;
 
 
 // Initialize physics engine
@@ -61,8 +63,8 @@ void initPhysics(bool interactive)
 
 	// inicialización del sistema de partículas
 	particleSys = new ParticleSystem();
-
-	}
+	RBSystem = new RigidBodySystem();
+}
 
 
 // Function to configure what happens in each step of physics
@@ -76,6 +78,7 @@ void stepPhysics(bool interactive, double t)
 	gScene->fetchResults(true);
 
 	particleSys->update(t);
+	RBSystem->update(t);
 }
 
 // Function to clean data

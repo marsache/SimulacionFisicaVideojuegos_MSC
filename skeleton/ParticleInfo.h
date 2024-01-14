@@ -4,8 +4,10 @@
 using namespace std;
 using namespace physx;
 typedef physx::PxVec3 Vector3;
+typedef physx::PxVec4 Vector4;
 
 namespace ParticleInfo {
+	// partículas
 	struct ParticleParameters {
 		Vector3 positionMin;
 		Vector3 positionMax;
@@ -31,5 +33,21 @@ namespace ParticleInfo {
 		ParticleParameters particle2 = { Vector3(-100, -100, -100), Vector3(-30, -10, -30), Vector3(-20, 30, -20), Vector3(30, 70, 30), 2, 1, &PxSphereGeometry(2), 2, 30 };
 		ParticleParameters particle1 = { Vector3(-100, -100, -100), Vector3(-30, -10, -30), Vector3(-20, 30, -20), Vector3(30, 70, 30), 1, 1, &PxSphereGeometry(1), 4, 30 };
 		ParticleParameters particle0 = { Vector3(-100, -100, -100), Vector3(-30, -10, -30), Vector3(-20, 30, -20), Vector3(30, 70, 30), 0.5, 1, &PxSphereGeometry(0.5), 4, 150 };
+	};
+
+
+	// sólidos rígidos
+	struct RBParameters {
+		Vector3 positionMin;
+		Vector3 positionMax;
+		Vector3 velocityMin;
+		Vector3 velocityMax;
+		float radiusMin;
+		float radiusMax;
+		float mass;
+	};
+
+	struct RBTypes {
+		RBParameters targetRB = { Vector3(10, 10, 10), Vector3(200, 200, 200), Vector3(0, 0, 0), Vector3(0, 0, 0), 2, 6, 10 };
 	};
 }

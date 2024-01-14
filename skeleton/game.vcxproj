@@ -260,9 +260,13 @@
     <ClCompile Include="ParticleForceRegistry.cpp" />
     <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="RBForceRegistry.cpp" />
+    <ClCompile Include="RBGenerator.cpp" />
+    <ClCompile Include="RBTargetGenerator.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
+    <ClCompile Include="RigidBodySystem.cpp" />
     <ClCompile Include="UniformParticleGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -274,9 +278,13 @@
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ParticleInfo.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="RBForceRegistry.h" />
+    <ClInclude Include="RBGenerator.h" />
+    <ClInclude Include="RBTargetGenerator.h" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
+    <ClInclude Include="RigidBodySystem.h" />
     <ClInclude Include="UniformParticleGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
