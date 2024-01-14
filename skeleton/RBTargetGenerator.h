@@ -6,7 +6,6 @@ using namespace ParticleInfo;
 
 class RBTargetGenerator : public RBGenerator
 {
-	const int RBs = 1;
 private:
 	virtual list<PxRigidDynamic*> generateRBsDynamic() {
 		list<PxRigidDynamic*> l; return l;

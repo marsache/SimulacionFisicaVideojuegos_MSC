@@ -20,6 +20,11 @@ protected:
 
 public:
 	RBForceRegistry() {}
+	~RBForceRegistry() {
+		fuerzas.clear();
+		RBs.clear();
+		delete(this);
+	}
 
 	void addRegistry(ForceGenerator* f, PxRigidDynamic* rb);
 	void deleteRBRegistry(PxRigidDynamic* rb);

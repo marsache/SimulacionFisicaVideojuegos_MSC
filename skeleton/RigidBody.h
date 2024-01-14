@@ -19,6 +19,7 @@ private:
 	Vector3 position, linearVelocity;
 	bool alive, hasLife;
 	Vector4 color;
+	RenderItem* dynamicItem;
 
 public:
 	RigidBody(Vector3 _position, int _radius, Vector3 _linearVelocity, float _life, bool _hasLife, Vector4 _color);

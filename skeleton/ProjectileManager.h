@@ -22,5 +22,5 @@ public:
 	void integrate(double t);
 
 private:
-	std::vector<RigidBody*> projectiles;
+	vector<RigidBody*> projectiles;
 };

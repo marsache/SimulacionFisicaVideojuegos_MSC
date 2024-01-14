@@ -7,7 +7,13 @@ RigidBodySystem::RigidBodySystem() {
 	projectileMngr = new ProjectileManager();
 }
 
-RigidBodySystem::~RigidBodySystem() {}
+RigidBodySystem::~RigidBodySystem() {
+	staticRigids.clear();
+	dynamicRigids.clear();
+	staticDynamicRigids.clear();
+	rbGenerators.clear();
+	delete(this);
+}
 
 void RigidBodySystem::update(double t) {
 	for (auto itGenerators : rbGenerators) {

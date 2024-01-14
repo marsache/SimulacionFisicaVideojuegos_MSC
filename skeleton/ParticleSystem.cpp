@@ -13,7 +13,11 @@ ParticleSystem::ParticleSystem() {
 }
 
 ParticleSystem::~ParticleSystem() {
-
+	particles.clear();
+	particleGenerators.clear();
+	forceGenerators.clear();
+	particlesWForces.clear();
+	delete(this);
 }
 
 void ParticleSystem::update(double t) {

@@ -21,6 +21,11 @@ protected:
 
 public:
 	ParticleForceRegistry() {}
+	~ParticleForceRegistry() {
+		fuerzas.clear();
+		particulas.clear();
+		delete(this);
+	}
 
 	//void addRegistry(ForceGenerator* f, Particle* p);
 	void deleteParticleRegistry(Particle* p);

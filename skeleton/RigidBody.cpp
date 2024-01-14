@@ -12,12 +12,11 @@ RigidBody::RigidBody(Vector3 _position, int _radius, Vector3 _linearVelocity, fl
 
 	rigidBDynamic->setMassSpaceInertiaTensor(Vector3(0, 0, 0));
 
-	RenderItem* dynamicItem;
 	dynamicItem = new RenderItem(shape_box_dynamic, rigidBDynamic, color);
 }
 
 RigidBody::~RigidBody() {
-
+	dynamicItem->release();
 }
 
 void RigidBody::integrate(double t) {
