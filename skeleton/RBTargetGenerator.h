@@ -16,7 +16,7 @@ private:
 		list<PxRigidStatic*> l; return l;
 	}
 
-	virtual list<pair<PxRigidDynamic*, PxRigidStatic*>> generateRBsDynamicStatic();
+	virtual list<pair<RigidBody*, PxRigidStatic*>> generateRBsDynamicStatic();
 	bool generate;
 
 public:

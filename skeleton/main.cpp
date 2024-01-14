@@ -108,6 +108,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	//case 'B': break;
 	//case ' ':	break;
+	case 'Z':
+	{
+		RBSystem->createProjectile();
+		break;
+	}
 	case ' ':
 	{
 		break;

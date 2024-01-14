@@ -45,9 +45,11 @@ namespace ParticleInfo {
 		float radiusMin;
 		float radiusMax;
 		float mass;
+		float life;
 	};
 
 	struct RBTypes {
-		RBParameters targetRB = { Vector3(10, 10, 10), Vector3(200, 200, 200), Vector3(0, 0, 0), Vector3(0, 0, 0), 2, 6, 10 };
+		RBParameters targetRB = { Vector3(10, 10, 10), Vector3(200, 200, 200), Vector3(0, 0, 0), Vector3(0, 0, 0), 2, 6, 10, 100 };
+		RBParameters projectile = { Vector3(10, 10, 10), Vector3(200, 200, 200), Vector3(0, 0, 0), Vector3(0, 0, 0), 2, 2, 10, 100 };
 	};
 }

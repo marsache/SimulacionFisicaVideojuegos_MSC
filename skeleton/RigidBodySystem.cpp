@@ -4,6 +4,7 @@ RigidBodySystem::RigidBodySystem() {
 	// creación de todos los sistemas de partículas
 	// creación de dianas y soportes
 	createTargetRBGenerator();
+	projectileMngr = new ProjectileManager();
 }
 
 RigidBodySystem::~RigidBodySystem() {}
@@ -13,6 +14,8 @@ void RigidBodySystem::update(double t) {
 		for (auto itRB : itGenerators->generateRBsDynamicStatic())
 			staticDynamicRigids.push_back(itRB);
 	}
+
+	projectileMngr->integrate(t);
 }
 
 void RigidBodySystem::createTargetRBGenerator() {
@@ -34,4 +37,8 @@ void RigidBodySystem::createTargetRBGenerator() {
 
 		rbGenerators.push_back(targetRBG);
 	}
+}
+
+void RigidBodySystem::createProjectile() {
+	projectileMngr->createProjectile();
 }

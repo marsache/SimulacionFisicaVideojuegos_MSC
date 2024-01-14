@@ -6,8 +6,8 @@ RBTargetGenerator::~RBTargetGenerator() {
 	delete(this);
 }
 
-list<pair<PxRigidDynamic*, PxRigidStatic*>> RBTargetGenerator::generateRBsDynamicStatic() {
-	list<pair<PxRigidDynamic*, PxRigidStatic*>> RBsList;
+list<pair<RigidBody*, PxRigidStatic*>> RBTargetGenerator::generateRBsDynamicStatic() {
+	list<pair<RigidBody*, PxRigidStatic*>> RBsList;
 	if (generate) {
 		generate = false;
 
@@ -21,20 +21,6 @@ list<pair<PxRigidDynamic*, PxRigidStatic*>> RBTargetGenerator::generateRBsDynami
 
 		radius = rand() % int(rbType.targetRB.radiusMax) + int(rbType.targetRB.radiusMin);
 
-		PxRigidDynamic* rigidBDynamic = gPhysics->createRigidDynamic(PxTransform(position));
-		rigidBDynamic->setLinearVelocity({ 0, 0, 0 });
-		rigidBDynamic->setAngularVelocity({ 0, 0, 0 });
-		PxShape* shape_box_dynamic = CreateShape(PxBoxGeometry(radius, radius, radius));
-		rigidBDynamic->attachShape(*shape_box_dynamic);
-		PxRigidBodyExt::updateMassAndInertia(*rigidBDynamic, 0.15);
-		gScene->addActor(*rigidBDynamic);
-
-		rigidBDynamic->setMassSpaceInertiaTensor(Vector3(0, 0, 0));
-
-		RenderItem* dynamicItem;
-		dynamicItem = new RenderItem(shape_box_dynamic, rigidBDynamic, { 0.8, 0.8, 0.8, 1 });
-
-
 		PxRigidStatic* rigidBStatic = gPhysics->createRigidStatic(PxTransform(position - Vector3(0, 100, 0)));
 		PxShape* shape_box_static = CreateShape(PxBoxGeometry(5, 1, 5));
 		rigidBStatic->attachShape(*shape_box_static);
@@ -44,7 +30,7 @@ list<pair<PxRigidDynamic*, PxRigidStatic*>> RBTargetGenerator::generateRBsDynami
 		staticItem = new RenderItem(shape_box_static, rigidBStatic, { 0.8, 0.8, 0.8, 1 });
 
 
-		RBsList.push_back({ rigidBDynamic, rigidBStatic });
+		RBsList.push_back({ new RigidBody(position, radius, velocity, rbType.targetRB.life, false, {0.8, 0.8, 0.8, 1}), rigidBStatic });
 
 	}
 	return RBsList;
