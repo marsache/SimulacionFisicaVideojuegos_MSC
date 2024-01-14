@@ -22,13 +22,13 @@ protected:
 public:
 	ParticleForceRegistry() {}
 
-	/*void addRegistry(ForceGenerator* f, Particle* p);
+	//void addRegistry(ForceGenerator* f, Particle* p);
 	void deleteParticleRegistry(Particle* p);
-	void deleteForceRegistry(ForceGenerator* f);*/
+	void deleteForceRegistry(ForceGenerator* f);
 	void updateForces(double t) {}
 	//void addForce(ForceGenerator* f);
-	void updateParticles(double t) {}
-	void deleteDeadParticles() {}
+	//void updateParticles(double t);
+	//void deleteDeadParticles();
 	/*void generateParticles(ForceGenerator* f);
 	void generateStaticParticles(ForceGenerator* f);
 	void generateExplosionParticles(ForceGenerator* f);

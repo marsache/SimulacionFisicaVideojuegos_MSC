@@ -20,7 +20,7 @@ namespace ParticleInfo {
 	};
 
 	struct ParticleTypes {
-		ParticleParameters uniformParticle = { Vector3(0, 200, 155), Vector3(400, 15, 15), Vector3(0, -6, 0), Vector3(0, -6, 0), 1, 1, &PxSphereGeometry(1), 1, 150, Vector4(50, 50, 50, 50) };
+		ParticleParameters uniformParticle = { Vector3(0, 200, 155), Vector3(400, 15, 15), Vector3(0, -6, 0), Vector3(0, -6, 0), 1, 1, &PxSphereGeometry(1), 1, 400, Vector4(50, 50, 50, 50) };
 
 
 		ParticleParameters fountainParticle = { Vector3(1, 1, 1), Vector3(10, 10, 10), Vector3(3, 3, 3), Vector3(10, 10, 10), 2, 1, &PxSphereGeometry(3), 1, 100 };

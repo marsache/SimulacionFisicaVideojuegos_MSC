@@ -34,12 +34,12 @@ void ParticleSystem::update(double t) {
 
 	// se actualizan todas las partículas afectadas por fuerzas
 	particleForceRegistry->updateForces(t);
-	particleForceRegistry->updateParticles(t);
+	//particleForceRegistry->updateParticles(t);
 
-	particleForceRegistry->deleteDeadParticles();
+	//particleForceRegistry->deleteDeadParticles();
 
 	// se eliminan las partículas muertas
-	//deleteParticles();
+	deleteParticles();
 
 	// genera más fuegos artificiales
 	explode();
