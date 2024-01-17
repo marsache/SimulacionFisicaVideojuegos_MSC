@@ -25,6 +25,7 @@ public:
 		//physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(RADIUS_INFLUENCED_AREA));
 		//renderInfluenceArea = new RenderItem(shape, &influencedArea, COLOR);
 	}
+	~WindForce() { delete(this); }
 
 	virtual void updateForce(Particle* p, double t);
 	//virtual void updateForce(PxRigidDynamic* p, double t);

@@ -13,7 +13,7 @@ class FireworkParticleGenerator : public ParticleGenerator
 {
 public:
 	FireworkParticleGenerator() : ParticleGenerator() {}
-	~FireworkParticleGenerator() {}
+	~FireworkParticleGenerator() { delete(this); }
 
 	Firework* generateParticle();
 	list<Firework*> createChildren(Firework* parent);

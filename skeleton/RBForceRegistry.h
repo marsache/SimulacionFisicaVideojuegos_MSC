@@ -31,11 +31,7 @@ public:
 	void deleteForceRegistry(ForceGenerator* f);
 	void updateForces(double t);
 	void addForce(ForceGenerator* f);
-	//void updateRBs(double t);
-	//void deleteDeadRBs();
 	void generateRBs(ForceGenerator* f);
-	//void generateStaticRBs(ForceGenerator* f);
-	//void generateExplosionRBs(ForceGenerator* f);
 	void addForceToAllRBs(ForceGenerator* f);
 	list<PxRigidDynamic*> generateDynamicRigids();
 	list<PxRigidDynamic*> generateGroundDynamicRigids();

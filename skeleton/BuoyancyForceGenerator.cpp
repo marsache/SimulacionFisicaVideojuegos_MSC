@@ -2,10 +2,6 @@
 
 BuoyancyForceGenerator::BuoyancyForceGenerator(float h, float v, float d, Particle* lP) : ForceGenerator(), height(h), volume(v), liquidDensity(d), liquidParticle(lP) {}
 
-BuoyancyForceGenerator::~BuoyancyForceGenerator() {
-	delete(this);
-}
-
 void BuoyancyForceGenerator::updateForce(Particle* p, double t) {
 	float h = p->getPosition().y;
 	float h0 = liquidParticle->getPosition().y;

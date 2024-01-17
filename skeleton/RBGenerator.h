@@ -16,7 +16,6 @@ class RBGenerator
 protected:
 	string name;
 	Vector3 position, velocity;
-	//double generationProbability;
 	int numParticles, radius;
 
 public:

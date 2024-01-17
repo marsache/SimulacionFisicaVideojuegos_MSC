@@ -62,7 +62,7 @@ void ParticleSystem::update(double t) {
 	particleForceRegistry->deleteDeadParticles();
 
 	// se eliminan las partículas muertas
-	//deleteParticles();
+	deleteParticles();
 }
 
 ParticleGenerator* ParticleSystem::getParticleGenerator(string name) {

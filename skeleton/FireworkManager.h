@@ -11,6 +11,7 @@ private:
 
 public:
 	FireworkManager();
+	~FireworkManager() { delete(this); }
 	void update(double t);
 	void startFireworks();
 };

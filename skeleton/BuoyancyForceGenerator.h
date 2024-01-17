@@ -13,7 +13,7 @@ protected:
 
 public:
 	BuoyancyForceGenerator(float h, float v, float d, Particle* lP);
-	~BuoyancyForceGenerator();
+	~BuoyancyForceGenerator() { delete(this); }
 	virtual void updateForce(Particle* p, double t);
 	virtual void updateForce(PxRigidDynamic* p, double t) {};
 };

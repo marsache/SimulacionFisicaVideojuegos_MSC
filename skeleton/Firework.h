@@ -9,12 +9,10 @@ class Firework : public Particle
 public:
 	Firework(Vector3 pos, Vector3 _vel, float rad, float _mass, PxGeometry* shape, int gen, float pLife, Vector4 color) :
 		Particle(pos, _vel, rad, _mass, shape, gen, pLife, color), generation(gen) {}
-	~Firework() {}
 
 	int getGen() { return generation; }
 
 private:
-	//virtual list<Particle*> generateParticles();
 
 	int generation;
 };

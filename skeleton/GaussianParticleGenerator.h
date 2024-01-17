@@ -15,10 +15,10 @@ class GaussianParticleGenerator : public ParticleGenerator
 {
 public:
 	GaussianParticleGenerator();
+	~GaussianParticleGenerator() { delete(this); }
 	virtual list<Particle*> generateParticles();
 
 protected:
-
 	Vector3 devPos, devVel;
 	double devT;
 };
