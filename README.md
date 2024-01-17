@@ -1,3 +1,10 @@
+## Controles
+
+- Para moverse por el espacio, pulsar `W`, `A`, `S` y `D`.
+- Para disparar, pulsar `Z`.
+- Para rotar la cámara, hacer click y arrastrar con el ratón.
+
+
 # SimulacionFisicaVideojuegos
 Repositorio de las prácticas de la asignatura de Simulación Física de Videojuegos
 
