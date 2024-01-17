@@ -13,8 +13,8 @@ class UniformParticleGenerator : public ParticleGenerator
 public:
 	UniformParticleGenerator();
 	~UniformParticleGenerator();
+	virtual list<Particle*> generateParticles();
 
 protected:
 	int index;
-	virtual list<Particle*> generateParticles();
 };

@@ -38,7 +38,6 @@ ParticleSystem* particleSys;
 RigidBodySystem* RBSystem;
 FireworkManager* fireworkM;
 
-
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -131,8 +130,10 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
 
-	if (RBSystem->collision(actor1, actor2)) 
+	if (RBSystem->collision(actor1, actor2)) {
 		fireworkM->startFireworks();
+		particleSys->winPoint();
+	}
 }
 
 

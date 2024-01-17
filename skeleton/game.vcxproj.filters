@@ -25,6 +25,7 @@
     <ClCompile Include="Firework.cpp" />
     <ClCompile Include="FireworkParticleGenerator.cpp" />
     <ClCompile Include="FireworkManager.cpp" />
+    <ClCompile Include="GaussianParticleGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="Firework.h" />
     <ClInclude Include="FireworkParticleGenerator.h" />
     <ClInclude Include="FireworkManager.h" />
+    <ClInclude Include="GaussianParticleGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

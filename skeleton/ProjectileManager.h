@@ -14,7 +14,7 @@ extern PxScene* gScene;
 
 class ProjectileManager
 {
-	const int COOLDOWN_TIME = 100;
+	const int COOLDOWN_TIME = 50;
 public:
 	ProjectileManager();
 	~ProjectileManager();

@@ -6,6 +6,7 @@
 #include "ParticleForceRegistry.h"
 #include "ParticleInfo.h"
 #include "UniformParticleGenerator.h"
+#include "GaussianParticleGenerator.h"
 
 using namespace std;
 using namespace ParticleInfo;
@@ -23,22 +24,19 @@ private:
 	list<ForceGenerator*> forceGenerators;
 	unordered_set<Particle*> particlesWForces;
 
-	void createUniformParticleGenerator();
-	void createGaussianParticleGenerator();
-	//void createFountainParticleGenerator();
-	//void createFireworkGenerator();
-
 	ParticleGenerator* getParticleGenerator(string name);
 	void deleteParticles();
 
-	// sólidos rígidos 
-	/*list<PxRigidStatic*> staticRigids;
-	list<PxRigidDynamic*> dynamicRigids;
-	RBForceRegistry* rbForceRegistry;
-	list<ParticleGenerator*> rbGenerators;*/
+	UniformParticleGenerator* uniformPG;
+	GaussianParticleGenerator* gaussianPG;
+
+	int points;
 
 public:
 	ParticleSystem();
 	~ParticleSystem();
 	void update(double t);
+
+	int getPoints() { return points; }
+	void winPoint() { points++; }
 };

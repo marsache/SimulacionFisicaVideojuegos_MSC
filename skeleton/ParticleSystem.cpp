@@ -1,13 +1,14 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem() {
+ParticleSystem::ParticleSystem() : points(0) {
 	// se crean todos los sistemas de partículas
 	// sistema de partículas de nieve
-	createUniformParticleGenerator();
+	uniformPG = new UniformParticleGenerator();
+	uniformPG->setName("Uniform");
 
 	// sistema de partículas de polvo
-
-	// ...
+	gaussianPG = new GaussianParticleGenerator();
+	gaussianPG->setName("Gaussian");
 }
 
 ParticleSystem::~ParticleSystem() {
@@ -21,8 +22,17 @@ ParticleSystem::~ParticleSystem() {
 void ParticleSystem::update(double t) {
 	// se actualizan todos los generadores
 	// las partículas de cada generador se añaden a la lista de partículas del sistema
-	for (auto itGenerators : particleGenerators) {
+	/*for (auto itGenerators : particleGenerators) {
 		for (auto itParticle : itGenerators->generateParticles())
+			particles.push_back(itParticle);
+	}*/
+
+	if (points % 20 <= 10) {
+		for (auto itParticle : uniformPG->generateParticles())
+			particles.push_back(itParticle);
+	}
+	else {
+		for (auto itParticle : gaussianPG->generateParticles())
 			particles.push_back(itParticle);
 	}
 
@@ -59,55 +69,3 @@ void ParticleSystem::deleteParticles() {
 			++it;
 	}
 }
-
-void ParticleSystem::createUniformParticleGenerator() {
-	auto it = particleGenerators.begin();
-	bool encontrado = false;
-	while (!encontrado && it != particleGenerators.end()) {
-		if ((*it)->getName() == "Uniform") {
-			delete(*it);
-			particleGenerators.erase(it);
-			encontrado = true;
-		}
-		else
-			++it;
-	}
-
-	if (!encontrado) {
-		UniformParticleGenerator* uniformPG = new UniformParticleGenerator();
-		uniformPG->setName("Uniform");
-
-		particleGenerators.push_back(uniformPG);
-	}
-}
-
-//void ParticleSystem::createFireworkGenerator() {
-//	FireworkParticleGenerator* fireworkParticleGenerator = new FireworkParticleGenerator();
-//	fireworks.push_back(fireworkParticleGenerator->generateParticle());
-//}
-
-//void ParticleSystem::createGaussianParticleGenerator() {
-//	auto it = particleGenerators.begin();
-//	bool encontrado = false;
-//	while (!encontrado && it != particleGenerators.end()) {
-//		if ((*it)->getName() == "Gaussian") {
-//			delete(*it);
-//			particleGenerators.erase(it);
-//			encontrado = true;
-//		}
-//		else
-//			++it;
-//	}
-//
-//	if (!encontrado) {
-//		GaussianParticleGenerator* gaussianPG = new GaussianParticleGenerator();
-//		gaussianPG->setName("Gaussian");
-//
-//		particleGenerators.push_back(gaussianPG);
-//	}
-//}
-//
-//void ParticleSystem::createFireworkGenerator() {
-//	FireworkParticleGenerator* fireworkParticleGenerator = new FireworkParticleGenerator();
-//	fireworks.push_back(fireworkParticleGenerator->generateParticle());
-//}
