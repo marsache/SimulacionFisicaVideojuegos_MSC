@@ -128,3 +128,10 @@ void ParticleForceRegistry::addForceToAllParticles(ForceGenerator* f) {
 		++itParticles;
 	}
 }
+
+
+void ParticleForceRegistry::addParticle(Particle* p) {
+	auto itParticula = particulas.find(p);
+	if (itParticula == particulas.end())
+		particulas.insert({ p, {} });
+}

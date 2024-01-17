@@ -11,6 +11,11 @@ ParticleSystem::ParticleSystem() : points(0) {
 	gaussianPG = new GaussianParticleGenerator();
 	gaussianPG->setName("Gaussian");
 
+	windForce = new WindForce(1000);
+	windForce->setName("Wind");
+	forceGenerators.push_back(windForce);
+	particleForceRegistry->addForce(windForce);
+
 	generateBuoyancyForce();
 	createGravityForce();
 }
@@ -31,12 +36,18 @@ void ParticleSystem::update(double t) {
 			particles.push_back(itParticle);
 	}*/
 
-	if (points % 20 <= 10) {
+	if (points % 10 == 1) {
 		for (auto itParticle : uniformPG->generateParticles())
+			particleForceRegistry->addParticle(itParticle);
+		particleForceRegistry->addForceToAllParticles(windForce);
+
+	}
+	else if (points % 20 <= 10) {
+		for (auto itParticle : uniformPG->generateParticles()) 
 			particles.push_back(itParticle);
 	}
 	else {
-		for (auto itParticle : gaussianPG->generateParticles())
+		for (auto itParticle : gaussianPG->generateParticles()) 
 			particles.push_back(itParticle);
 	}
 
@@ -51,7 +62,7 @@ void ParticleSystem::update(double t) {
 	particleForceRegistry->deleteDeadParticles();
 
 	// se eliminan las partículas muertas
-	deleteParticles();
+	//deleteParticles();
 }
 
 ParticleGenerator* ParticleSystem::getParticleGenerator(string name) {
@@ -87,22 +98,6 @@ void ParticleSystem::generateBuoyancyForce() {
 		else
 			++itFuerza;
 	}
-
-	//if (!encontrado) {
-	//	Particle* p1 = new Particle(Vector3(0, -380, 0), Vector3(0, 0, 0), 40, 100, &PxBoxGeometry(10, 10, 10), 1, -1, Vector4(1, 0.2, 0.2, 1));
-	//	Particle* p2 = new Particle(Vector3(30, -450, 0), Vector3(0, 0, 0), 20, 100, &PxBoxGeometry(70, 5, 70), 1, -1, Vector4(0, 1, 1, 1));
-
-	//	BuoyancyForceGenerator* f1 = new BuoyancyForceGenerator(10, 1000, 1000, p2);
-	//	f1->setName("Buoyancy");
-
-	//	forceGenerators.push_back(f1);
-
-	//	particleForceRegistry->addRegistry(f1, p1);
-	//	//particleForceRegistry->addForce(f1);
-
-	//	particlesWForces.insert(p1);
-	//	particles.push_back(p2);
-	//}
 
 	if (!encontrado) {
 		for (int i = 0; i < 5; ++i) {

@@ -30,4 +30,5 @@ public:
 	bool isAlive() { return alive; }
 	void setAlive(bool a) { alive = a; }
 	Vector3 getPosition() { return position.p; }
+	Vector3 getVelocity() { return velocity; }
 };

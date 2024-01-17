@@ -13,11 +13,7 @@ protected:
 
 public:
 	ForceGenerator() {}
-	~ForceGenerator() { 
-		name = "";
-		k = 0;
-		delete(this); 
-	}
+	~ForceGenerator() { delete(this); }
 	virtual void updateForce(Particle* p, double t) {};
 	virtual void updateForce(PxRigidDynamic* p, double t) {};
 	//virtual unordered_set<Particle*> generateParticles() = 0;

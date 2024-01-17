@@ -276,6 +276,7 @@
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="RigidBodySystem.cpp" />
     <ClCompile Include="UniformParticleGenerator.cpp" />
+    <ClCompile Include="WindForce.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BuoyancyForceGenerator.h" />
@@ -302,6 +303,7 @@
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="RigidBodySystem.h" />
     <ClInclude Include="UniformParticleGenerator.h" />
+    <ClInclude Include="WindForce.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
