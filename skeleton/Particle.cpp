@@ -1,5 +1,4 @@
 #include "Particle.h"
-#include "Particle.h"
 
 Particle::Particle(Vector3 pos, Vector3 vel, float rad, float _mass, PxGeometry* shape, int gen, float pLife, Vector4 _color) :
 	position(pos), velocity(vel), initialVelocity(vel), radius(rad), mass(_mass), timeAlive(0), generation(gen), 

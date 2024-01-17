@@ -13,8 +13,6 @@ public:
 
 	int getGen() { return generation; }
 
-	Vector3 getPosition() { return position.p; }
-
 private:
 	//virtual list<Particle*> generateParticles();
 

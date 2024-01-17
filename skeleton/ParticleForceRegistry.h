@@ -27,13 +27,14 @@ public:
 		delete(this);
 	}
 
-	//void addRegistry(ForceGenerator* f, Particle* p);
+	void addRegistry(ForceGenerator* f, Particle* p);
 	void deleteParticleRegistry(Particle* p);
 	void deleteForceRegistry(ForceGenerator* f);
-	void updateForces(double t) {}
-	//void addForce(ForceGenerator* f);
-	//void updateParticles(double t);
-	//void deleteDeadParticles();
+	void updateForces(double t);
+	void addForce(ForceGenerator* f);
+	void updateParticles(double t);
+	void deleteDeadParticles();
+	void addForceToAllParticles(ForceGenerator* f);
 	/*void generateParticles(ForceGenerator* f);
 	void generateStaticParticles(ForceGenerator* f);
 	void generateExplosionParticles(ForceGenerator* f);

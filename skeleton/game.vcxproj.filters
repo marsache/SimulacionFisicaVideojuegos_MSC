@@ -26,6 +26,8 @@
     <ClCompile Include="FireworkParticleGenerator.cpp" />
     <ClCompile Include="FireworkManager.cpp" />
     <ClCompile Include="GaussianParticleGenerator.cpp" />
+    <ClCompile Include="BuoyancyForceGenerator.cpp" />
+    <ClCompile Include="GravityForce.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -54,6 +56,8 @@
     <ClInclude Include="FireworkParticleGenerator.h" />
     <ClInclude Include="FireworkManager.h" />
     <ClInclude Include="GaussianParticleGenerator.h" />
+    <ClInclude Include="BuoyancyForceGenerator.h" />
+    <ClInclude Include="GravityForce.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

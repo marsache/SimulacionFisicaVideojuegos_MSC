@@ -1,5 +1,31 @@
 #include "ParticleForceRegistry.h"
 
+void ParticleForceRegistry::addRegistry(ForceGenerator* f, Particle* p) {
+	// se actualiza el map de fuerzas
+	auto itMapFuerzas = fuerzas.find(f);
+	// si no se ha registrado ya la fuerza, se crea
+	if (itMapFuerzas == fuerzas.end()) {
+		ListaParticulasPorFuerza lista;
+		lista.insert(p);
+		fuerzas.insert({ f, lista }); // se inserta la fuerza y la partícula
+	}
+	// si ya existe la fuerza, se añade la partícula
+	else
+		itMapFuerzas->second.insert(p); // se inserta la partícula
+
+	// se actualiza el map de partículas
+	auto itMapParticulas = particulas.find(p);
+	// si no se ha registrado ya la fuerza, se crea
+	if (itMapParticulas == particulas.end()) {
+		ListaFuerzasPorParticula lista;
+		lista.insert(f);
+		particulas.insert({ p, lista }); // se inserta la partícula y la fuerza
+	}
+	// si ya existe la partícula, se añade la fuerza
+	else
+		itMapParticulas->second.insert(f);
+}
+
 void ParticleForceRegistry::deleteParticleRegistry(Particle* p) {
 	// se elimina la partícula de todas las fuerzas que tiene
 	// (se elimina del map de fuerzas)
@@ -50,23 +76,55 @@ void ParticleForceRegistry::deleteForceRegistry(ForceGenerator* f) {
 	}
 }
 
-//void ParticleForceRegistry::deleteDeadParticles() {
-//	auto particle = particulas.begin();
-//	while (particle != particulas.end()) {
-//		if (!(*particle).first->isAlive()) {
-//			Particle* aux = (*particle).first;
-//			particle++;
-//			deleteParticleRegistry(aux);
-//			delete(aux);
-//		}
-//		else
-//			particle++;
-//	}
-//}
+void ParticleForceRegistry::addForce(ForceGenerator* f) {
+	// sólo crea la fuerza si aún no existe
+	auto itFuerza = fuerzas.find(f);
+	if (itFuerza == fuerzas.end())
+		fuerzas.insert({ f, {} });
+}
 
-//void ParticleForceRegistry::updateParticles(double t) {
-//	// se actualizan todas las partículas
-//	for (auto particle : particulas) {
-//		particle.first->integrate(t);
-//	}
-//}
+void ParticleForceRegistry::deleteDeadParticles() {
+	auto particle = particulas.begin();
+	while (particle != particulas.end()) {
+		if (!(*particle).first->isAlive()) {
+			Particle* aux = (*particle).first;
+			particle++;
+			deleteParticleRegistry(aux);
+			delete(aux);
+		}
+		else
+			particle++;
+	}
+}
+
+void ParticleForceRegistry::updateParticles(double t) {
+	// se actualizan todas las partículas
+	for (auto particle : particulas) {
+		particle.first->integrate(t);
+	}
+}
+
+void ParticleForceRegistry::updateForces(double t) {
+	// recorre el map de particulas
+	auto itMapParticulas = particulas.begin();
+	while (itMapParticulas != particulas.end())
+	{
+		auto itFuerzaParticula = itMapParticulas->second.begin();
+		while (itFuerzaParticula != itMapParticulas->second.end()) {
+			// actualiza la fuerza
+			(*itFuerzaParticula)->updateForce(itMapParticulas->first, t);
+			++itFuerzaParticula;
+		}
+		++itMapParticulas;
+	}
+}
+
+void ParticleForceRegistry::addForceToAllParticles(ForceGenerator* f) {
+	auto itForce = fuerzas.find(f);
+	auto itParticles = particulas.begin();
+	while (itParticles != particulas.end()) {
+		(*itParticles).second.insert(f);
+		(*itForce).second.insert((*itParticles).first);
+		++itParticles;
+	}
+}

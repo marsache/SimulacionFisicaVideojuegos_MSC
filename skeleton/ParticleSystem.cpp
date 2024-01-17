@@ -1,6 +1,7 @@
 #include "ParticleSystem.h"
 
 ParticleSystem::ParticleSystem() : points(0) {
+	particleForceRegistry = new ParticleForceRegistry();
 	// se crean todos los sistemas de partículas
 	// sistema de partículas de nieve
 	uniformPG = new UniformParticleGenerator();
@@ -9,6 +10,9 @@ ParticleSystem::ParticleSystem() : points(0) {
 	// sistema de partículas de polvo
 	gaussianPG = new GaussianParticleGenerator();
 	gaussianPG->setName("Gaussian");
+
+	generateBuoyancyForce();
+	createGravityForce();
 }
 
 ParticleSystem::~ParticleSystem() {
@@ -42,9 +46,9 @@ void ParticleSystem::update(double t) {
 
 	// se actualizan todas las partículas afectadas por fuerzas
 	particleForceRegistry->updateForces(t);
-	//particleForceRegistry->updateParticles(t);
+	particleForceRegistry->updateParticles(t);
 
-	//particleForceRegistry->deleteDeadParticles();
+	particleForceRegistry->deleteDeadParticles();
 
 	// se eliminan las partículas muertas
 	deleteParticles();
@@ -67,5 +71,80 @@ void ParticleSystem::deleteParticles() {
 		}
 		else
 			++it;
+	}
+}
+
+void ParticleSystem::generateBuoyancyForce() {
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Buoyancy") {
+			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			delete(*itFuerza);
+			forceGenerators.erase(itFuerza);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
+
+	//if (!encontrado) {
+	//	Particle* p1 = new Particle(Vector3(0, -380, 0), Vector3(0, 0, 0), 40, 100, &PxBoxGeometry(10, 10, 10), 1, -1, Vector4(1, 0.2, 0.2, 1));
+	//	Particle* p2 = new Particle(Vector3(30, -450, 0), Vector3(0, 0, 0), 20, 100, &PxBoxGeometry(70, 5, 70), 1, -1, Vector4(0, 1, 1, 1));
+
+	//	BuoyancyForceGenerator* f1 = new BuoyancyForceGenerator(10, 1000, 1000, p2);
+	//	f1->setName("Buoyancy");
+
+	//	forceGenerators.push_back(f1);
+
+	//	particleForceRegistry->addRegistry(f1, p1);
+	//	//particleForceRegistry->addForce(f1);
+
+	//	particlesWForces.insert(p1);
+	//	particles.push_back(p2);
+	//}
+
+	if (!encontrado) {
+		for (int i = 0; i < 5; ++i) {
+			int x = rand() % 600 - 600;
+			int z = rand() % 600 - 600;
+			Particle* p1 = new Particle(Vector3(x, -380, -z), Vector3(0, 0, 0), 40, 100, &PxBoxGeometry(10, 10, 10), 1, -1, Vector4(1, 0.2, 0.2, 1));
+			Particle* p2 = new Particle(Vector3(x - 30, -450, -z), Vector3(0, 0, 0), 20, 100, &PxBoxGeometry(70, 5, 70), 1, -1, Vector4(0, 1, 1, 1));
+
+			BuoyancyForceGenerator* f1 = new BuoyancyForceGenerator(10, 1000, 1000, p2);
+			f1->setName("Buoyancy");
+
+			forceGenerators.push_back(f1);
+
+			particleForceRegistry->addRegistry(f1, p1);
+			//particleForceRegistry->addForce(f1);
+
+			particlesWForces.insert(p1);
+			particles.push_back(p2);
+		}
+	}
+}
+
+void ParticleSystem::createGravityForce() {
+	auto itFuerza = forceGenerators.begin();
+	bool encontrado = false;
+	while (!encontrado && itFuerza != forceGenerators.end()) {
+		if ((*itFuerza)->getName() == "Gravity") {
+			particleForceRegistry->deleteForceRegistry(*itFuerza);
+			delete(*itFuerza);
+			forceGenerators.erase(itFuerza);
+			encontrado = true;
+		}
+		else
+			++itFuerza;
+	}
+
+	if (!encontrado) {
+		GravityForce* gravityForce = new GravityForce(-10);
+		gravityForce->setName("Gravity");
+
+		forceGenerators.push_back(gravityForce);
+		particleForceRegistry->addForce(gravityForce);
+		particleForceRegistry->addForceToAllParticles(gravityForce);
 	}
 }

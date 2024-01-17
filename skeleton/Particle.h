@@ -29,4 +29,5 @@ public:
 	void addForce(Vector3 f) { forces += f; }
 	bool isAlive() { return alive; }
 	void setAlive(bool a) { alive = a; }
+	Vector3 getPosition() { return position.p; }
 };

@@ -7,6 +7,8 @@
 #include "ParticleInfo.h"
 #include "UniformParticleGenerator.h"
 #include "GaussianParticleGenerator.h"
+#include "BuoyancyForceGenerator.h"
+#include "GravityForce.h"
 
 using namespace std;
 using namespace ParticleInfo;
@@ -29,6 +31,9 @@ private:
 
 	UniformParticleGenerator* uniformPG;
 	GaussianParticleGenerator* gaussianPG;
+
+	void generateBuoyancyForce();
+	void createGravityForce();
 
 	int points;
 

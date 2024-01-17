@@ -66,6 +66,16 @@ void initPhysics(bool interactive)
 	particleSys = new ParticleSystem();
 	RBSystem = new RigidBodySystem();
 	fireworkM = new FireworkManager();
+
+	// generar suelo
+	PxRigidStatic* suelo = gPhysics->createRigidStatic(PxTransform({ 0, -400, 0 }));
+	PxShape* shape = CreateShape(PxBoxGeometry(1000, 0.1, 1000));
+	suelo->attachShape(*shape);
+	gScene->addActor(*suelo);
+
+	// pintar suelo
+	RenderItem* item;
+	item = new RenderItem(shape, suelo, { 0.2, 0.2, 1, 1 });
 }
 
 

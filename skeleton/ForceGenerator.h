@@ -12,7 +12,7 @@ protected:
 	double k; // constante elástica
 
 public:
-	ForceGenerator();
+	ForceGenerator() {}
 	~ForceGenerator() { 
 		name = "";
 		k = 0;
