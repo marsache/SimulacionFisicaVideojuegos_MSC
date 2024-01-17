@@ -27,11 +27,17 @@ private:
 
 	ProjectileManager* projectileMngr;
 
+	RBTargetGenerator* targetGenerator;
+
 	void createTargetRBGenerator();
+	bool checkCollision(physx::PxActor* actor1, physx::PxActor* actor2);
+
+	bool thereIsTarget;
 
 public:
 	RigidBodySystem();
 	~RigidBodySystem();
 	void update(double t);
 	void createProjectile();
+	void collision(physx::PxActor* actor1, physx::PxActor* actor2);
 };

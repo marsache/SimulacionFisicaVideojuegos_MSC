@@ -20,6 +20,9 @@
     <ClCompile Include="RBForceRegistry.cpp" />
     <ClCompile Include="RBGenerator.cpp" />
     <ClCompile Include="RBTargetGenerator.cpp" />
+    <ClCompile Include="ProjectileManager.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="Firework.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -42,6 +45,9 @@
     <ClInclude Include="RBForceRegistry.h" />
     <ClInclude Include="RBGenerator.h" />
     <ClInclude Include="RBTargetGenerator.h" />
+    <ClInclude Include="ProjectileManager.h" />
+    <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="Firework.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

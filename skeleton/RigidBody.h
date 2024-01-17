@@ -20,6 +20,7 @@ private:
 	bool alive, hasLife;
 	Vector4 color;
 	RenderItem* dynamicItem;
+	PxRigidDynamic* rigidBDynamic;
 
 public:
 	RigidBody(Vector3 _position, int _radius, Vector3 _linearVelocity, float _life, bool _hasLife, Vector4 _color);
@@ -27,4 +28,6 @@ public:
 
 	bool isAlive() { return alive; }
 	void integrate(double t);
+	PxRigidDynamic* getBody() { return rigidBDynamic; }
+	void kill() { dynamicItem->release(); }
 };

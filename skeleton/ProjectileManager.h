@@ -14,13 +14,17 @@ extern PxScene* gScene;
 
 class ProjectileManager
 {
+	const int COOLDOWN_TIME = 100;
 public:
 	ProjectileManager();
 	~ProjectileManager();
 	void createProjectile();
 	void killProjectile();
 	void integrate(double t);
+	bool collision(physx::PxActor* actor1, physx::PxActor* actor2);
 
 private:
 	vector<RigidBody*> projectiles;
+	bool cooldown;
+	int cooldownTime;
 };

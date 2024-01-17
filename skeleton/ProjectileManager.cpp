@@ -1,15 +1,19 @@
 #include "ProjectileManager.h"
 
-ProjectileManager::ProjectileManager() {}
+ProjectileManager::ProjectileManager() : cooldown(false), cooldownTime(0) {}
 
 ProjectileManager::~ProjectileManager() {
 	delete(this);
 }
 
 void ProjectileManager::createProjectile() {
-	RBTypes rbType;
-	projectiles.push_back(new RigidBody(GetCamera()->getTransform().p, 
-		rbType.projectile.radiusMin, GetCamera()->getDir() * 150, rbType.projectile.life, true, {0.8, 0.8, 0, 1}));
+	if (!cooldown) {
+		cooldown = true;
+		cooldownTime = 0;
+		RBTypes rbType;
+		projectiles.push_back(new RigidBody(GetCamera()->getTransform().p,
+			rbType.projectile.radiusMin, GetCamera()->getDir() * 150, rbType.projectile.life, true, { 0.8, 0.8, 0, 1 }));
+	}
 }
 
 void ProjectileManager::killProjectile() {
@@ -28,8 +32,25 @@ void ProjectileManager::killProjectile() {
 }
 
 void ProjectileManager::integrate(double t) {
-	for (auto itProjectile : projectiles) 
+	cooldownTime++;
+	if (cooldownTime >= COOLDOWN_TIME)
+		cooldown = false;
+	for (auto itProjectile : projectiles)
 		(*itProjectile).integrate(t);
 
 	killProjectile();
+}
+
+bool ProjectileManager::collision(physx::PxActor* actor1, physx::PxActor* actor2) {
+	int i = 0;
+	bool encontrado = false;
+	while (i < projectiles.size() && !encontrado) {
+		if (projectiles[i]->getBody() == actor1 || projectiles[i]->getBody() == actor2) {
+			projectiles[i]->kill();
+			encontrado = true;
+		}
+		else
+			++i;
+	}
+	return encontrado;
 }

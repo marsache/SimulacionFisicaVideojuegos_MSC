@@ -254,6 +254,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="Firework.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -274,6 +275,7 @@
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
+    <ClInclude Include="Firework.h" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleForceRegistry.h" />

@@ -16,9 +16,12 @@ private:
 	}
 
 	virtual list<pair<RigidBody*, PxRigidStatic*>> generateRBsDynamicStatic();
+
 	bool generate;
 
 public:
 	RBTargetGenerator();
 	~RBTargetGenerator();
+	pair<RigidBody*, PxRigidStatic*> generateTarget();
+	void destroyTarget() { generate = true; }
 };
