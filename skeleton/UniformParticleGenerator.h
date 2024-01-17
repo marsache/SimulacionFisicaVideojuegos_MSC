@@ -15,5 +15,6 @@ public:
 	~UniformParticleGenerator();
 
 protected:
+	int index;
 	virtual list<Particle*> generateParticles();
 };
