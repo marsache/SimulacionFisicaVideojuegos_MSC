@@ -7,11 +7,13 @@ using namespace std;
 class Firework : public Particle
 {
 public:
-	Firework(Vector3 pos, Vector3 _vel, float rad, float _mass, PxGeometry* shape, int gen, float pLife) :
-		Particle(pos, _vel, rad, _mass, shape, gen, pLife), generation(gen) {}
+	Firework(Vector3 pos, Vector3 _vel, float rad, float _mass, PxGeometry* shape, int gen, float pLife, Vector4 color) :
+		Particle(pos, _vel, rad, _mass, shape, gen, pLife, color), generation(gen) {}
 	~Firework() {}
 
 	int getGen() { return generation; }
+
+	Vector3 getPosition() { return position.p; }
 
 private:
 	//virtual list<Particle*> generateParticles();

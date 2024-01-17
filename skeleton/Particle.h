@@ -11,7 +11,7 @@ typedef physx::PxVec4 Vector4;
 
 class Particle
 {
-private:
+protected:
 	Vector3 velocity, forces, acceleration, initialVelocity;
 	float radius, particleLife;
 	int mass;

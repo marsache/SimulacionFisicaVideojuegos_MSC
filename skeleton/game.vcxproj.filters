@@ -23,6 +23,8 @@
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Firework.cpp" />
+    <ClCompile Include="FireworkParticleGenerator.cpp" />
+    <ClCompile Include="FireworkManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -48,6 +50,8 @@
     <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Firework.h" />
+    <ClInclude Include="FireworkParticleGenerator.h" />
+    <ClInclude Include="FireworkManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

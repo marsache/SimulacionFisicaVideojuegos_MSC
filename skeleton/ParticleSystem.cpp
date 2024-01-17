@@ -7,8 +7,6 @@ ParticleSystem::ParticleSystem() {
 
 	// sistema de partículas de polvo
 
-	// fireworks
-
 	// ...
 }
 
@@ -32,10 +30,6 @@ void ParticleSystem::update(double t) {
 	for (auto itParticles : particles)
 		itParticles->integrate(t);
 
-	// se actualizan todos los fireworks
-	/*for (auto itFireworks : fireworks)
-		itFireworks->integrate(t);*/
-
 	// se actualizan todas las partículas afectadas por fuerzas
 	particleForceRegistry->updateForces(t);
 	//particleForceRegistry->updateParticles(t);
@@ -44,33 +38,6 @@ void ParticleSystem::update(double t) {
 
 	// se eliminan las partículas muertas
 	deleteParticles();
-
-	// genera más fuegos artificiales
-	explode();
-}
-
-void ParticleSystem::explode() {
-	/*auto it = fireworks.begin();
-	while (it != fireworks.end()) {
-		if (!(*it)->isAlive()) {
-			Firework* aux = (*it);
-
-			FireworkParticleGenerator* fireworkParticleGenerator = new FireworkParticleGenerator();
-			list<Firework*> listFireworks = fireworkParticleGenerator->createChildren(aux);
-
-			auto itFireworks = listFireworks.begin();
-
-			while (itFireworks != listFireworks.end()) {
-				fireworks.push_back(*itFireworks);
-				++itFireworks;
-			}
-
-			it = fireworks.erase(it);
-			delete(aux);
-		}
-		else
-			++it;
-	}*/
 }
 
 ParticleGenerator* ParticleSystem::getParticleGenerator(string name) {
@@ -113,6 +80,11 @@ void ParticleSystem::createUniformParticleGenerator() {
 		particleGenerators.push_back(uniformPG);
 	}
 }
+
+//void ParticleSystem::createFireworkGenerator() {
+//	FireworkParticleGenerator* fireworkParticleGenerator = new FireworkParticleGenerator();
+//	fireworks.push_back(fireworkParticleGenerator->generateParticle());
+//}
 
 //void ParticleSystem::createGaussianParticleGenerator() {
 //	auto it = particleGenerators.begin();

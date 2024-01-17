@@ -17,7 +17,6 @@ class ParticleSystem
 private:
 	// partículas
 	list<Particle*> particles;
-	//list<Firework*> fireworks;
 	list<ParticleGenerator*> particleGenerators;
 
 	ParticleForceRegistry* particleForceRegistry;
@@ -26,10 +25,8 @@ private:
 
 	void createUniformParticleGenerator();
 	void createGaussianParticleGenerator();
-	void createFountainParticleGenerator();
-	void createFireworkGenerator();
-
-	void explode();
+	//void createFountainParticleGenerator();
+	//void createFireworkGenerator();
 
 	ParticleGenerator* getParticleGenerator(string name);
 	void deleteParticles();

@@ -12,6 +12,7 @@
 
 #include "ParticleSystem.h"
 #include "RigidBodySystem.h"
+#include "FireworkManager.h"
 
 std::string display_text = "This is a test";
 
@@ -35,6 +36,7 @@ ContactReportCallback gContactReportCallback;
 
 ParticleSystem* particleSys;
 RigidBodySystem* RBSystem;
+FireworkManager* fireworkM;
 
 
 // Initialize physics engine
@@ -64,6 +66,7 @@ void initPhysics(bool interactive)
 	// inicialización del sistema de partículas
 	particleSys = new ParticleSystem();
 	RBSystem = new RigidBodySystem();
+	fireworkM = new FireworkManager();
 }
 
 
@@ -79,6 +82,7 @@ void stepPhysics(bool interactive, double t)
 
 	particleSys->update(t);
 	RBSystem->update(t);
+	fireworkM->update(t);
 }
 
 // Function to clean data
@@ -127,7 +131,8 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
 
-	RBSystem->collision(actor1, actor2);
+	if (RBSystem->collision(actor1, actor2)) 
+		fireworkM->startFireworks();
 }
 
 

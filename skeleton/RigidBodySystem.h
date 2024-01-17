@@ -7,6 +7,7 @@
 #include "RBTargetGenerator.h"
 #include "RigidBody.h"
 #include "ProjectileManager.h"
+#include "ParticleSystem.h"
 
 using namespace std;
 using namespace ParticleInfo;
@@ -26,7 +27,7 @@ private:
 	list<RBGenerator*> rbGenerators;
 
 	ProjectileManager* projectileMngr;
-
+	ParticleSystem* particleSystem;
 	RBTargetGenerator* targetGenerator;
 
 	void createTargetRBGenerator();
@@ -39,5 +40,5 @@ public:
 	~RigidBodySystem();
 	void update(double t);
 	void createProjectile();
-	void collision(physx::PxActor* actor1, physx::PxActor* actor2);
+	bool collision(physx::PxActor* actor1, physx::PxActor* actor2);
 };

@@ -6,7 +6,7 @@ RigidBodySystem::RigidBodySystem() : thereIsTarget(false) {
 	//createTargetRBGenerator();
 	targetGenerator = new RBTargetGenerator();
 	targetGenerator->setName("Target");
-
+	particleSystem = new ParticleSystem();
 	projectileMngr = new ProjectileManager();
 }
 
@@ -57,7 +57,7 @@ void RigidBodySystem::createProjectile() {
 	projectileMngr->createProjectile();
 }
 
-void RigidBodySystem::collision(physx::PxActor* actor1, physx::PxActor* actor2) {
+bool RigidBodySystem::collision(physx::PxActor* actor1, physx::PxActor* actor2) {
 	if (staticDynamicRigids.size() > 0) {
 		if ((actor1 == staticDynamicRigids.front().first->getBody() || actor2 == staticDynamicRigids.front().first->getBody()) && projectileMngr->collision(actor1, actor2)) {
 			staticDynamicRigids.front().first->kill();
@@ -65,8 +65,11 @@ void RigidBodySystem::collision(physx::PxActor* actor1, physx::PxActor* actor2) 
 			staticDynamicRigids.pop_front();
 			targetGenerator->destroyTarget();
 			thereIsTarget = false;
+			return true;
 		}
+		return false;
 	}
+	return false;
 }
 
 bool RigidBodySystem::checkCollision(physx::PxActor* actor1, physx::PxActor* actor2) {
